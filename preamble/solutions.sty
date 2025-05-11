@@ -1,0 +1,92 @@
+\ProvidesPackage{preamble/solutions}
+\RequirePackage{amsmath,amsthm,amssymb,enumitem,xcolor,tcolorbox}
+\RequirePackage{physics, upgreek, mathtools, hyperref, cleveref}
+
+% ========== 核心格式设置 ==========
+% ---- 页面布局 ----
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2cm]{geometry}
+
+% ====== hyperref 超链接样式配置 ======
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+}
+
+% ---- 章节标题格式 ----
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Huge\bfseries\sffamily}
+  {\filright\chaptertitlename\ \thechapter}
+  {20pt}
+  {\Huge}
+
+% ---- 封面基础样式 ----
+\usepackage{titling}
+\renewcommand{\maketitle}{}  % 禁用默认封面
+\pretitle{
+\begin{center}\thispagestyle{empty}}  % 封面页无页码
+\posttitle{\end{center}
+}
+
+\crefname{chapterproblem}{Problem}{Problems}
+\Crefname{chapterproblem}{Problem}{Problems}
+
+% ====== 问题计数器 ======
+\newcounter{chapterproblem}[chapter]  % 每章重置的问题计数器
+\renewcommand{\thechapterproblem}{\thechapter-\arabic{chapterproblem}}  % 编号格式 1-1, 1-2
+
+\NewDocumentEnvironment{problem}{}{%
+    \clearpage
+    \refstepcounter{chapterproblem}%
+    \phantomsection % 
+    \label{problem:\thechapterproblem}%
+    \addcontentsline{toc}{section}{Problem~\thechapterproblem}
+    \noindent\textbf{\thechapterproblem}\quad
+    \ignorespaces
+}{%
+    \par\addvspace{1em}%
+}
+
+
+% ====== 子问题列表样式 ======
+\setlist[enumerate]{
+    label=(\alph*),  % 子问题标签 (a), (b)
+    leftmargin=2em,  % 左缩进
+    itemsep=0.5em,   % 项间距
+    topsep=0.5em,
+    resume            % 自动继续编号（如需分块列表）
+}
+
+% ====== 证明环境 ======
+\renewenvironment{proof}{%
+    \par\addvspace{0.5em}%
+    \noindent%
+    \textbf{Proof}% 固定标题 "Proof:"
+    \quad\ignorespaces%
+}{%
+    \hfill$\square$% 证毕符号
+    \par\addvspace{1em}%
+}
+
+% ---- 列表样式 ----
+\setlist[enumerate]{
+    label=(\alph*),
+    itemsep=0.5em,
+    topsep=0.5em,
+    partopsep=0pt
+}
+
+% ---- 数学符号快捷命令 ----
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\Sph}{\mathbb{S}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Hom}{Hom}

@@ -1,0 +1,26 @@
+\documentclass[12pt]{book}
+
+% ===== 加载全局格式配置 =====
+\usepackage{preamble/solutions}  % 自定义宏包
+\usepackage{physics}
+\usepackage{graphicx}                % 图片支持
+%\graphicspath{{figures/}}            % 图片路径
+\overfullrule=2pt  % 用黑条标记所有过宽的行
+% ===== 主文档结构 =====
+\begin{document}
+
+% ===== 封面 =====
+\frontmatter
+\include{preamble/titlepage}  % 插入封面
+
+% ===== 目录 =====
+\tableofcontents
+
+\mainmatter   % 正文部分
+\include{chapters/chapter1}  % 引入第 1 章
+\include{chapters/chapter2}  % 引入第 2 章
+
+%\appendix     % 附录部分（可选）
+% \include{chapters/appendix}
+
+\end{document}
