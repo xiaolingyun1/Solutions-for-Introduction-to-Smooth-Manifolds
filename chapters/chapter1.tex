@@ -12,8 +12,9 @@
     \begin{equation*}
       p = \pi(0,1), \quad q = \pi(0,-1)
     \end{equation*}
-    denote the two distinct equivalence classes in $M$ corresponding to the two origins.\\
-    To describe a basis for the topology on \(M\), for any open interval \(W \subset \mathbb{R}\), define the following sets:
+    denote the two distinct equivalence classes in $M$ corresponding to the two origins.
+
+    To describe a basis for the topology on \(M\), for any open interval \(W \subseteq \mathbb{R}\), define the following sets:
     \begin{equation*}
       \begin{aligned}
         U_W &= \pi\left( \{(x, \pm 1) : x \in W \} \right), &\text{for } 0 \notin W, \\
@@ -30,22 +31,79 @@
     We next show that $M$ is second-countable and locally Euclidean but not Hausdorff.
     \begin{itemize}
       \item \textbf{Second-countability:} \\
-      
-      \item \textbf{Local Euclidean property:} \\
+      Define:
+      \begin{equation*}
+        \mathcal{B} = \{U_W, U_W^{\pm} \colon W \text{is an open interval with rational endpoints.}\}
+      \end{equation*}
+      Since there are only countably many open intervals in $\mathbb{R}$ with rational endpoints, the collection $\mathcal{B}$ is countable.
+
+      We claim that $\mathcal{B}$ is a basis for the topology on $M$. Let $U \subseteq M$ be any open set and let $x \in U$. We want to find some $B \in \mathcal{B}$ such that $x \in B \subseteq U$.\\
+      There are two cases to consider:
+      \begin{itemize}
+        \item If $x \in M$ corresponds to a point $\pi(x_0, \pm 1)$ with $x_0 \neq 0$, then $\pi^{-1}(U)$ is an open subset of $X$ containing both $(x_0, 1)$ and $(x_0, -1)$ (since they are identified when $x_0 \ne 0$). Since $X$ inherits the subspace topology from $\mathbb{R}^2$, there exists an open interval $W \ni x_0$ with rational endpoints such that $(W \times \{\pm 1\}) \subseteq \pi^{-1}(U)$. Then $U_W = \pi((W \times \{\pm 1\})) \subseteq U$, and $U_W \in \mathcal{B}$ if $0 \notin W$.
+        \item If $x = p = \pi(0, 1)$ or $x = q = \pi(0, -1)$, then $x \in U$ implies $\pi^{-1}(U)$ contains either $(0,1)$ or $(0,-1)$ respectively. Since $\pi^{-1}(U)$ is open in $X$, there exists an open interval $W \ni 0$ such that:
+        \begin{itemize}
+          \item $(W \setminus \{0\}) \times \{\pm 1\} \subseteq \pi^{-1}(U)$,
+          \item and either $(0,1) \in \pi^{-1}(U)$ or $(0,-1) \in \pi^{-1}(U)$.
+        \end{itemize}
+        Hence, either $U_W^+ \subseteq U$ or $U_W^- \subseteq U$, and such sets are in $\mathcal{B}$ because $W$ has rational endpoints.
+      \end{itemize}
+      Therefore, $M$ is second-countable.
+      \item \textbf{Local Euclidean property:} 
+      \begin{itemize}
+        \item For $x \notin \{p, q\}$, define a map
+        \begin{equation*}
+          \varphi \colon U_{\R \setminus \{0\}} \rightarrow \R \setminus \{0\}, \quad \pi(x, \pm 1) \mapsto x
+        \end{equation*}
+        Clearly $\varphi$ is bijective. Let $V$ be an open subset of $\R \setminus \{0\}$, $\varphi^{-1}(V)$ is open if and only if $\pi^{-1} \circ \varphi^{-1}(V)$ is open in $X$. Since
+        \begin{equation*}
+          \pi^{-1} \circ \varphi^{-1}(V) = (V \times \{-1\}) \cup (V \times \{1\})
+        \end{equation*}
+        which is open in $X$, $\varphi^{-1}(V)$ is open in $U_{\R \setminus \{0\}}$. This indicates that $\varphi$ is continuous.
+
+        Let $U \subseteq U_{\R \setminus \{0\}}$ be an open subset of $M$, it means $\pi^{-1}(U)$ is open in $X$. Since 
+        \begin{equation*}
+          \varphi(U) = \{x \colon (x,1) \in \pi^{-1}(U)\} \cup \{x \colon (x, -1) \in \pi^{-1}(U)\}
+        \end{equation*}
+        is open in $X$, $\varphi$ yields a homeomorphism. Hence, every point with $x \neq 0$ has a neighborhood homeomorphic to $\mathbb{R} \setminus \{0\}$, which is locally Euclidean.
+        \item For $x = p$, define the map
+        \[
+          \psi_+ \colon U^+_{(-1,1)} \to (-1, 1), \quad 
+          \psi_+(\pi(x, \pm 1)) = x, \quad \psi_+(p) = 0.
+        \]
+        This map is well-defined and bijective. To show that $\psi_+$ is a homeomorphism, it suffices to verify that both $\psi_+$ and its inverse are continuous at $p$ and $0$, respectively.\\
+        For any $\varepsilon \in (0,1)$, we have
+        \[
+          \psi_+^{-1}((-\varepsilon, \varepsilon)) = U^+_{(-\varepsilon, \varepsilon)} \quad \text{and} \quad \psi_+(U^+_{(-\varepsilon, \varepsilon)}) = (-\varepsilon, \varepsilon),
+        \]
+        which shows that $\psi_+$ is continuous at $p$ and its inverse is continuous at $0$. Therefore, $\psi_+$ is a homeomorphism.
+        \item For $x = q$, The proof is identical to Case 2.
+      \end{itemize}
       \item \textbf{Not Hausdorff:} \\
+      We show that $M$ is not Hausdorff by exhibiting two points that cannot be separated by disjoint open neighborhoods.
+
+      Consider the two points $p = \pi(0,1)$ and $q = \pi(0,-1)$. Suppose for contradiction that there exist disjoint open sets $U$ and $V$ in $M$ such that $p \in U$ and $q \in V$.
+
+      Since the sets $U$ and $V$ are open neighborhoods of $p$ and $q$, respectively, there exist basic open sets $U_W^+ \subseteq U$ and $U_{W'}^- \subseteq V$, where $W$ and $W'$ are open intervals containing $0$.
+      
+      Let $W'' = W \cap W'$; then $0 \in W''$, so $W'' \setminus \{0\} \neq \emptyset$. Define:
+      \begin{equation*}
+        A := \pi\left( (W'' \setminus \{0\}) \times \{\pm 1\} \right) = U_{W'' \setminus \{0\}} \subseteq U_W^+ \cap U_{W'}^-.
+      \end{equation*}
+      Therefore, $U_W^+$ and $U_{W'}^-$ are not disjoint; they always intersect in a nonempty open set.\\
+      This contradicts the assumption that $p$ and $q$ can be separated by disjoint open sets. Hence, $M$ is not Hausdorff.
     \end{itemize}
   \end{proof}
 \end{problem}
 
 %1-2
 \begin{problem}
-  % \hyperlink{1-7}{1-7}
   Show that a disjoint union of uncountably many copies of $\R$ is locally Euclidean and Hausdorff, but not second-countable.
   \begin{proof}
     Let $ X = \coprod_{\alpha \in A}\R_\alpha $, $ A $ is an uncountable index set. $ U \subseteq X $ is open if and only if $ \forall \alpha \in A$, $ \{x\in \R: (\alpha,x)\in U\}$ is open in $\R$.
     \begin{enumerate}
       \item[1.] $X$ is locally Euclidean. \\
-      By definiton, $\R_\alpha = \{(\alpha,x): x \in \R\}$. $\forall (\alpha, x) \in \R_\alpha$,  since $\R_\alpha$ is an open subset of $X$(By the definiton of topology of $X$) and $\R_\alpha$ is homeomorphic to $\R$, $X$ is locally Euclidean.
+      By definition, $\R_\alpha = \{(\alpha,x): x \in \R\}$. $\forall (\alpha, x) \in \R_\alpha$,  since $\R_\alpha$ is an open subset of $X$(By the definition of topology of $X$) and $\R_\alpha$ is homeomorphic to $\R$, $X$ is locally Euclidean.
       
       \item[2.] $X$ is Hausdorff. \\
       Let $(\alpha,x),(\beta,y) \in X$. if $\alpha \neq \beta$, clearly we have two disjoint open subset $\R_\alpha$ and $\R_\beta$ such that 
@@ -54,7 +112,7 @@
       \item[3.] $X$ is not second-countable. \\
       Assume that $X$ is second-countable with its countable basis $\mathcal{B}=\{B_i\}$ and $I$ is an countable index set. Since $\R_\alpha$ is an non-empty open subset of $X$, we can always find $B_i \in \mathcal{B}$ such that $B_i \subseteq \R_\alpha$. By Axiom of Choice, we can define 
       $$ f \colon A \rightarrow I, \quad  \alpha \mapsto i \ \text{ s.t. } \ B_i \subseteq \R_{\alpha}. $$
-      Clearly $f$ is injective. This leads to an contradiction, since $A$ is uncountable and $I$ is countable.
+      Clearly $f$ is injective. This leads to an contradiction, since $A$ is uncountable but $I$ is countable.
     \end{enumerate}
   \end{proof}
 \end{problem}
@@ -82,16 +140,37 @@
   \begin{enumerate}
     \item  Assuming that each set in $\mathcal{U}$ intersects only finitely many others, show
     that $\mathcal{U}$ is locally finite.
-
     \item Give an example to show that the converse to (a) may be false.
-    
     \item Now assume that the sets in $\mathcal{U}$ are precompact in $M$, and prove the converse: if $\mathcal{U}$ is locally finite, then each set in $\mathcal{U}$ intersects only finitely many others.
   \end{enumerate}
-
   \begin{proof}
     \begin{enumerate}
-      \item Easy.
+      \item Omitted as "Easy".
       \item Let $M=\R$, $\mathcal{U} = \{(n, \infty):n \in \N\} \cup \{(-\infty, 1)\}$
+\item Assume $\mathcal{U}$ is a locally finite open cover of $M$, and that each set in $\mathcal{U}$ is precompact. Fix $U \in \mathcal{U}$, and define
+\[
+\mathcal{V} = \{V \in \mathcal{U} \colon V \cap U \neq \emptyset\},
+\]
+the collection of all elements in $\mathcal{U}$ that intersect $U$.
+
+Since $U$ is precompact, its closure $\overline{U}$ is compact. Because $\mathcal{U}$ is locally finite, for every point $x \in \overline{U}$, there exists an open neighborhood  $V_x$ intersects only finitely many elements of $\mathcal{U}$.
+
+Then $\{V_x\}_{x \in \overline{U}}$ is an open cover of $\overline{U}$ by elements of $\mathcal{U}$, so by compactness, there exists a finite subcover:
+\[
+\overline{U} \subseteq \bigcup_{i=1}^n V_{x_i}.
+\]
+Now for each $i = 1, \dots, n$, define
+\[
+\mathcal{V}_i = \{W \in \mathcal{U} \colon W \cap V_{x_i} \neq \emptyset\}.
+\]
+Since each $V_{x_i}$ intersects only finitely many elements of $\mathcal{U}$, each $\mathcal{V}_i$ is finite.
+Now, take any $V \in \mathcal{V}$. Then $V \cap U \neq \emptyset$, and since $\overline{U} \subseteq \bigcup_{i=1}^n V_{x_i}$, there exists some $i$ such that $V \cap V_{x_i} \neq \emptyset$, implying $V \in \mathcal{V}_i$. Thus,
+\[
+\mathcal{V} \subseteq \bigcup_{i=1}^n \mathcal{V}_i.
+\]
+As each $\mathcal{V}_i$ is finite and $n$ is finite, it follows that $\mathcal{V}$ is finite.
+
+Therefore, each $U \in \mathcal{U}$ intersects only finitely many other elements of $\mathcal{U}$.
     \end{enumerate}
   \end{proof}
 \end{problem}
@@ -100,9 +179,44 @@
 \begin{problem}
   Suppose $M$ is a locally Euclidean Hausdorff space. Show that $M$ is second
   countable if and only if it is paracompact and has countably many connected
-  components. [Hint: assuming $M$ is paracompact, show that each component
-  of $M$ has a locally finite cover by precompact coordinate domains, and extract
-  from this a countable subcover.]
+  components. 
+  \begin{proof}
+    \begin{enumerate}
+      \item[($\Rightarrow$)] 
+      By Proposition 1.11, second-countable property of topological manifold admits at most countably many connected components. Theorem 1.15 shows that every topological manifold is paracompact.
+
+      \item[($\Leftarrow$)] 
+      Suppose $M$ is paracompact and has countably many connected components. It suffices to show that each connected component is second countable, since a countable union of second countable spaces is second countable.
+
+      Let $C$ be a connected component of $M$. Since $M$ is locally Euclidean, there exists a basis of precompact coordinate charts. Let $\mathcal{U}$ be an open cover of $C$ by such charts. By paracompactness, there exists a locally finite refinement $\mathcal{V}$ of $\mathcal{U}$ consisting of precompact coordinate domains.
+
+      To show that $C$ is second countable, we will prove that $\mathcal{V}$ is countable. For this, define an equivalence relation $\sim$ on $\mathcal{V}$: for $U, V \in \mathcal{V}$, declare $U \sim V$ if there exists a finite sequence $U = U_0, U_1, \dots, U_n = V$ in $\mathcal{V}$ such that $U_i \cap U_{i+1} \neq \emptyset$ for all $i$. Denote by $[U]$ the equivalence class of $U$ under this relation.
+
+      We now show that $[U]$ is an open and closed subset of $C$:
+      \begin{itemize}
+        \item \emph{$[U]$ is open:} $U$ is a union of open set by definition.
+
+        \item \emph{$[U]$ is closed:} Let $x \in C \setminus [U]$. Since $\mathcal{V}$ is an open cover of $C$, there exists $V \in \mathcal{V}$ such that $x \in V$. If $V$ intersected any element of $[U]$, then $V$ would be connected to $U$ via a finite chain of overlapping sets, and hence $x \in [U]$, contradicting $x \in C \setminus [U]$. Therefore, $x$ has an open neighborhood contained in $C \setminus [U]$.
+
+        Since this holds for arbitrary $x \in C \setminus [U]$, we conclude that $C \setminus [U]$ is open, so $[U]$ is closed.
+      \end{itemize}
+
+      Since $C$ is connected and $[U]$ is nonempty, open, and closed in $C$, it must be that $[U] = C$. Hence, every element of $\mathcal{V}$ can be connected to $U$ via a finite chain of overlapping sets.
+
+      Now define inductively:
+      \[
+        \mathcal{V}_1 = \{U\}, \quad \mathcal{V}_{n+1} = \{V \in \mathcal{V} \colon \exists W \in \mathcal{V}_n \text{ with } V \cap W \neq \emptyset \}.
+      \]
+      Then $\bigcup_{n=1}^\infty \mathcal{V}_n = \mathcal{V}$. By \cref{problem:1-4}, each $\mathcal{V}_n$ is finite. Thus, $\mathcal{V}$ is a countable collection.
+
+      Since $\mathcal{V}$ is a countable open cover of $C$ by coordinate domains, the collection
+      \[
+      \overline{\mathcal{V}} = \{\overline{V} \colon V \in \mathcal{V}\}
+      \]
+      covers $C$ with countably many compact subsets, thus $C$ is $\sigma$-compact. By \cref{problem:1-3}, $C$ is second-countable.
+      Finally, $M$ is a countable disjoint union of its connected components, each of which is second countable, so $M$ is second-countable.
+    \end{enumerate}
+  \end{proof}
 \end{problem}
 
 %1-6
@@ -186,7 +300,7 @@
 
 %1-7
 \begin{problem}
-  Let $N$ denote the north pole $(0,\dots,0,1) \in \Sph^n \subset \mathbb{R}^{n+1}$, and let $S$ denote the south pole $(0,\dots,0,-1)$. Define the stereographic projection $\sigma\colon \Sph^n \setminus \{N\} \to \mathbb{R}^n$ by$$\sigma(x^1,\dots,x^{n+1}) = \frac{(x^1,\dots,x^n)}{1 - x^{n+1}}.$$ Let $\tilde{\sigma}(x) = - \sigma(-x)$ for $x \in \Sph^n \setminus \{S\}$.
+  Let $N$ denote the north pole $(0,\dots,0,1) \in \Sph^n \subseteq \mathbb{R}^{n+1}$, and let $S$ denote the south pole $(0,\dots,0,-1)$. Define the stereographic projection $\sigma\colon \Sph^n \setminus \{N\} \to \mathbb{R}^n$ by$$\sigma(x^1,\dots,x^{n+1}) = \frac{(x^1,\dots,x^n)}{1 - x^{n+1}}.$$ Let $\tilde{\sigma}(x) = - \sigma(-x)$ for $x \in \Sph^n \setminus \{S\}$.
   \begin{enumerate}
     \item For any $x \in \Sph^n \setminus \{N\}$, show that $\sigma(x) = u$, where $(u,0)$ is the point where the line through $N$ and $x$ intersects the hyperplane $x^{n+1} = 0$. Similarly, show that $\tilde{\sigma}(x)$ is the point where the line through $S$ and $x$ intersects the same hyperplane. (Thus $\tilde{\sigma}$ is called stereographic projection from the south pole.)
     \item Show that $\sigma$ is bijective, with inverse given by$$\sigma^{-1}(u^1,\dots,u^n) = \frac{(2u^1,\dots,2u^n, |u|^2 - 1)}{|u|^2 + 1}.$$
@@ -279,9 +393,9 @@
 
 %1-8
 \begin{problem}
-  By identifying $\R^2$ with $\mathbb{C}$, we can think of the unit circle $\Sph^1$ as a subset of the complex plane. An angle function on a subset $U \subset \Sph^1$ is a continuous function $\theta \colon U \to \mathbb{R}$ such that  $\ee^{\ii \theta(z)} = z$ for all $z \in U$. Show that there exists an angle function on an open subset $U \subset \Sph^1$ if and only if $U \neq \Sph^1$. For any such angle function, show that $(U, \theta)$ is a smooth coordinate chart for $\Sph^1$ with its standard smooth structure.
+  By identifying $\R^2$ with $\mathbb{C}$, we can think of the unit circle $\Sph^1$ as a subset of the complex plane. An angle function on a subset $U \subseteq \Sph^1$ is a continuous function $\theta \colon U \to \mathbb{R}$ such that  $\ee^{\ii \theta(z)} = z$ for all $z \in U$. Show that there exists an angle function on an open subset $U \subseteq \Sph^1$ if and only if $U \neq \Sph^1$. For any such angle function, show that $(U, \theta)$ is a smooth coordinate chart for $\Sph^1$ with its standard smooth structure.
   \begin{proof}
-    We prove the existence of an angle function $\theta$ on an open subset $U \subset \mathbb{S}^1$ for two cases: $U = \mathbb{S}^1$ and $U \subsetneq \mathbb{S}^1$.
+    We prove the existence of an angle function $\theta$ on an open subset $U \subseteq \mathbb{S}^1$ for two cases: $U = \mathbb{S}^1$ and $U \subsetneq \mathbb{S}^1$.
     \begin{itemize}
         \item \textbf{Nonexistence for $U = \mathbb{S}^1$:} \\
         Assume such $\theta \colon \mathbb{S}^1 \to \mathbb{R}$ exists. Define the exponential map:
@@ -337,11 +451,41 @@
   correspondence
   $$ (x^1 + \ii y^1, \dots, x^{n+1} + \ii y^{n+1}) \leftrightarrow (x^1, y^1, \dots, x^{n+1}, y^{n+1}) $$
   to identify $\mathbb{C}^{n+1}$ with $\mathbb{R}^{2n+2}$.)
+  \begin{proof}
+    The construction of smooth structure are exactly the same as in Example 1.5. Here we only prove $\mathbb{CP}^n$ is Hausdorff and second-countable.
+    \begin{itemize}
+      \item the quotient map $\pi$ is an open map\\
+      Let $U$ be an open subset of $\C^{n+1} \setminus \{0\}$, to prove the quotient map $\pi$ is an open map, it only suffices to prove that $\pi^{-1} \circ \pi (U)$ is open in $\C^{n+1} \setminus \{0\}$. Since
+      \[
+      \pi^{-1} \circ \pi (U) = \bigcup_{t \in \C^{\times}}tU
+      \]
+      for any fixed $t \in \C^{\times}$, $tU$ is an open subset, we show that their union $\pi^{-1} \circ \pi (U)$ must be open.
+      \item \textbf{Hausdorff property}\\
+      Let $[z] = [z_0 , \dots , z_n]$ and $[w] = [w_0 , \dots , w_n]$ be two distinct points in $\mathbb{CP}^n$. Then, $z$ and $w$ are not proportional, i.e., there is no $\lambda \in \C^{\times}$ such that $w = \lambda z$. 
+
+      Define the function $f \colon \C^{n+1} \times \C^{n+1} \to \C$ by
+      $$
+      f(z, w) = \sum_{i < j} |z_i w_j - z_j w_i|^2.
+      $$
+      This function is zero if and only if $z$ and $w$ are proportional. Since $[z] \neq [w]$, we have $f(z, w) > 0$. 
+
+      By continuity of $f$, there exist open neighborhoods $A \subset \C^{n+1} \setminus \{0\}$ of $z$ and $B \subset \C^{n+1} \setminus \{0\}$ of $w$ such that $f(a, b) > 0$ for all $a \in A$ and $b \in B$. 
+
+      Let $U = \pi(A)$ and $V = \pi(B)$. Since $\pi$ is an open map, $U$ and $V$ are open in $\mathbb{CP}^n$. Moreover, $U$ and $V$ are disjoint, because if $[a] = [b]$ for some $a \in A$ and $b \in B$, then $f(a, b) = 0$, which contradicts the construction of $A$ and $B$. 
+
+      Hence, $\mathbb{CP}^n$ is Hausdorff.
+      \item \textbf{Second-countable}\\
+      Since $\C^{n+1} \setminus \{0\}$ is second-countable, and $\pi$ is a continuous open map, the quotient space $\mathbb{CP}^n$ is also second-countable. 
+      \item \textbf{The compactness of $\mathbb{CP}^n$}\\
+      The compactness of $\mathbb{CP}^n$ follows from the fact that it is the continuous image of the unit sphere $\Sph^{2n+1} \subseteq \C^{n+1}$ under $\pi$. 
+    \end{itemize}
+
+  \end{proof}
 \end{problem}
 
 %1-10
 \begin{problem}
-  Let $k$ and $n$ be integers satisfying $0 < k < n$, and let $P, Q \subseteq \mathbb{R}^n$ be the linear subspaces spanned by $(e_1,\dots,e_k)$ and $(e_{k+1},\dots,e_n)$, respectively, where $e_i$ is the $i$th standard basis vector for $\mathbb{R}^n$. For any $k$-dimensional subspace $S \subseteq \mathbb{R}^n$ that has trivial intersection with $Q$, show that the coordinate representation $\varphi(S)$ constructed in Example 1.36 is the unique $(n-k) \times k$ matrix $B$ such that $S$ is spanned by the columns of the matrix $\bigl(
+  Let $k$ and $n$ be integers satisfying $0 < k < n$, and let $P, Q \subseteq \mathbb{R}^n$ be the linear subspaces spanned by $(e_1,\dots,e_k)$ and $(e_{k+1},\dots,e_n)$, respectively, where $e_i$ is the $i$th standard basis vector for $\mathbb{R}^n$. For any $k$-dimensional subspace $\subseteq \mathbb{R}^n$ that has trivial intersection with $Q$, show that the coordinate representation $\varphi(S)$ constructed in Example 1.36 is the unique $(n-k) \times k$ matrix $B$ such that $S$ is spanned by the columns of the matrix $\bigl(
     \begin{smallmatrix} I_k \\ B \end{smallmatrix}
     \bigr)$, where $I_k$ denotes the $k \times k$ identity matrix.
     \begin{proof}
@@ -447,8 +591,8 @@
             \begin{equation*}
               \varphi_i(x) = (x^1, \dots, \widehat{x^i}, \dots, 0) \in \partial \mathbb{H}^n,
             \end{equation*}
-            confirming $\mathbb{S}^{n-1} \subset \partial \overline{\mathbb{B}}^n$ via Theorem 1.46 (Boundary Invariance).
-          \item For $x \in \mathbb{B}^n$, the identity chart maps $x$ to $\mathbb{B}^n \subset \mathbb{R}^n$, proving $\mathbb{B}^n \subset \operatorname{Int}(\overline{\mathbb{B}}^n)$.
+            confirming $\mathbb{S}^{n-1} \subseteq \partial \overline{\mathbb{B}}^n$ via Theorem 1.46 (Boundary Invariance).
+          \item For $x \in \mathbb{B}^n$, the identity chart maps $x$ to $\mathbb{B}^n \subseteq \mathbb{R}^n$, proving $\mathbb{B}^n \subseteq \operatorname{Int}(\overline{\mathbb{B}}^n)$.
           \item Since $\overline{\mathbb{B}}^n = \mathbb{B}^n \cup \mathbb{S}^{n-1}$, we conclude:
             \begin{equation*}
               \partial \overline{\mathbb{B}}^n = \mathbb{S}^{n-1}, \quad \operatorname{Int}(\overline{\mathbb{B}}^n) = \mathbb{B}^n.
@@ -481,7 +625,7 @@
               $$
               \left( \prod_{i=1}^k U_i \times V, (\varphi_1,\ldots,\varphi_k,\psi) \right)
               $$
-              mapping to $\mathbb{R}^m \times \mathbb{R}^n \subset \mathbb{H}^{m+n}$
+              mapping to $\mathbb{R}^m \times \mathbb{R}^n \subseteq \mathbb{H}^{m+n}$
           \end{enumerate}
           \item \textbf{Boundary Charts}: For $(p,q) \in M \times \partial N$:   
           \begin{enumerate}
