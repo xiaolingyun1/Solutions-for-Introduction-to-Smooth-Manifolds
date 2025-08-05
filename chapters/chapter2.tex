@@ -11,8 +11,395 @@
     \end{cases}
     \]
     Show that for every \( x \in \mathbb{R} \), there exist smooth coordinate charts \( (U, \varphi) \) containing \( x \), and \( (V, \psi) \) containing \( f(x) \), such that the map
-    \[
-    \psi \circ f \circ \varphi^{-1}
-    \]
+    $\psi \circ f \circ \varphi^{-1}$
     is smooth as a function from \( \varphi(U \cap f^{-1}(V)) \) to \( \mathbb{R} \). However, \( f \) is not smooth in the sense we have defined in this chapter.
+    \begin{proof}
+        $f$ is not smooth because $f$ is not continuous. Let $U=(-1,1)$, $V=(1/2, 3/2)$, $\varphi = \psi = \textbf{id}$. Then $\varphi(U \cap f^{-1}(V)) = [0,1)$, $\psi(V) = \{1\}$. $\psi \circ f \circ \varphi^{-1}$ is smooth from $\varphi(U \cap f^{-1}(V))$ to $\psi(V)$ because it is a constant map.
+    \end{proof}
+\end{problem}
+
+%2-2
+\begin{problem}
+    Prove Proposition 2.12(smoothness of maps into product manifolds).
+    \begin{proof}
+        Let $p \in N$ be arbitrary. Choose charts 
+        \[
+        \phi : U \subseteq N \to \mathbb{R}^n, \quad \psi_i : V_i \subseteq M_i \to \mathbb{R}^{m_i}, \quad \text{for } i = 1, \dots, k,
+        \]
+        such that $F(p) \in V_1 \times \dots \times V_k$, and $F(U) \subseteq V_1 \times \dots \times V_k$.
+
+        Define $\psi = \psi_1 \times \dots \times \psi_k : V_1 \times \dots \times V_k \to \mathbb{R}^{m_1 + \dots + m_k}$, which is a smooth chart on the product manifold $M_1 \times \dots \times M_k$.
+
+        Then the local expression of $F$ in coordinates is:
+        \[
+        \psi \circ F \circ \phi^{-1} : \phi(U) \subseteq \mathbb{R}^n \to \mathbb{R}^{m_1 + \dots + m_k}.
+        \]
+        This map can be written as
+        \[
+        \psi \circ F \circ \phi^{-1}(x) = \big( \psi_1 \circ F_1 \circ \phi^{-1}(x), \dots, \psi_k \circ F_k \circ \phi^{-1}(x) \big).
+        \]
+        So in coordinates, the map $\psi \circ F \circ \phi^{-1}$ is smooth if and only if each component $\psi_i \circ F_i \circ \phi^{-1}$ is smooth. Hence, $F$ is smooth if and only if each $F_i$ is smooth.
+    \end{proof}
+\end{problem}
+
+%2-3
+\begin{problem}
+    For each of the following maps between spheres, compute sufficiently many coordinate representations to prove that it is smooth.
+    \begin{enumerate}
+        \item $p_n \colon \Sph^1 \to \Sph^1$ is the $n$th power map for $n \in \mathbb{Z}$, given in complex notation by
+        \[
+            p_n(z) = z^n.
+        \]
+        \item $\alpha \colon \Sph^n \to \Sph^n$ is the antipodal map given by
+        \[
+            \alpha(x) = -x.
+        \]
+        \item $F \colon \Sph^3 \to \Sph^2$ is given by
+        \[
+            F(w, z) = (\bar{z}w + \bar{w}z,\ i\bar{w}z - i\bar{z}w,\ |z|^2 - |w|^2),
+        \]
+        where we think of $\Sph^3$ as the subset
+        \[
+            \{(w, z) \in \mathbb{C}^2 \mid |w|^2 + |z|^2 = 1\}.
+        \]
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item First, $p_n$ is continuous:
+            $$ 
+            |z_1 - z_2| = |\mathrm{e}^{\mathrm{i}n\theta_1} - \mathrm{e}^{\mathrm{i}n\theta_2}| \leq n|\theta_1 - \theta_2|.
+            $$
+            Now we prove that $p_n$ is smooth. $\forall z \in \Sph^1$, there exists an open subset $U$ that contains $z$ and diffeomorphic to an open interval $I$, the diffeomorphism denotes 
+            $$ 
+            \varphi \colon U \to I \quad \mathrm{e}^{\mathrm{i}\theta} \mapsto \theta.
+            $$
+            Similarly we can find an open subset $V$ of $\Sph^1$ that contains $p_n(z) = z^n$ and diffeomorphic to an open interval $J$, the diffeomorphism denotes $\psi$. Since $p_n$ is continuous, we may shrink $U$ small enough that $p_n(U) \subseteq V$. Thus the coordinate representation of $p_n$ is 
+            $$ 
+            \psi \circ p_n \circ \varphi^{-1}(\theta) = n\theta + 2k(\theta)\pi.
+            $$
+            Since $k(\theta)$ must be integers and $\psi \circ p_n \circ \varphi^{-1}$ is a continuous map on an interval $I$, $k(\theta)$ must be constant thus $p_n$ is smooth.
+
+            \item For any point $x\in \Sph^n$, it is contained in a smooth chart $(U_i^+, \varphi_i^+)$ such that 
+            $$ \varphi_i^+(x^1, \dots, x^{n+1}) = (x^1, \dots, \widehat{x^i}, \dots, x^{n+1}).$$
+            Then another smooth chart $(U_i^-, \varphi_i^-)$ must contains $\alpha(x)$. $\alpha^{-1}(U_i^-) \cap U_i^+ = U_i^+$ and $\varphi_i^+(\alpha^{-1}(U_i^-) \cap U_i^+ = U_i^+)=\B^n$. The coordinate representation of $\alpha$ is 
+            $$\varphi_i^- \circ \alpha \circ (\varphi_i^+)^{-1}(u^1, \dots, u^n) = -(u^1, \dots, u^n),$$
+            which is clearly smooth.
+
+            \item Let $U_1 = \Sph^3 \setminus \{N\}$ and $V_1 = \Sph^2 \setminus \{N\}$, and let $\varphi$ and $\psi$ be the corresponding coordinate charts. The coordinate expression of $F$ is computed as
+            \[
+            \psi \circ F \circ \varphi^{-1}(u^1, u^2, u^3) =
+            \left(
+            \frac{2u^1u^3 + u^2(|u|^2 - 1)}{2(u^1)^2 + 2(u^2)^2},
+            \frac{u^1(|u|^2 - 1) - 2u^2u^3}{2(u^1)^2 + 2(u^2)^2}
+            \right),
+            \]
+            which is smooth on its domain $\varphi(U_1 \cap F^{-1}(V_1))$.
+
+            The computation using other coordinate charts proceeds similarly and yields smooth coordinate expressions as well. Hence, the map $F$ is smooth on all of $\Sph^3$.
+        \end{enumerate}
+    \end{proof}
+\end{problem}
+
+%2-4
+\begin{problem}
+    Show that the inclusion map $\overline{\B}^n \to \R^n$ is smooth when $\overline{\B}^n$ is regarded as a smooth manifold with boundary.
+
+    \begin{proof}
+        We only prove that the inclusion map is smooth at boundary points. Use the smooth structure defined in \cref{problem:1-11}, let $p \in \partial \overline{\B}^n$ and choose a boundary chart $(V_i, \varphi_i)$ contains $p$. Coordinate expression of the inclusion map $\iota$ 
+        $$ \iota \circ \varphi_i^{-1} \colon \mathbb{H}^n \cap \B^n \to \R^n \quad (u^1, \dots, u^n) \mapsto (u^1, \dots, u^{i-1}, \sqrt{1-|u|^2}, u^i, \dots, u^{n-1})$$
+        can be easily extended to a smooth map on $\B^n$, thus the inclusion map $\iota$ is smooth.
+    \end{proof}
+\end{problem}
+
+%2-5
+\begin{problem}
+    Let $\mathbb{R}$ be the real line with its standard smooth structure, and let $\tilde{\mathbb{R}}$ denote the same underlying topological manifold equipped with the smooth structure defined in Example 1.23. Let $f \colon \mathbb{R} \to \mathbb{R}$ be a function that is smooth in the usual sense.
+    \begin{enumerate}
+        \item Show that $f$ is also smooth as a map from $\mathbb{R}$ to $\tilde{\mathbb{R}}$.
+        \item Show that $f$ is smooth as a map from $\tilde{\mathbb{R}}$ to $\mathbb{R}$ if and only if $f^{(n)}(0) = 0$ whenever $n$ is not an integral multiple of $3$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}
+            \item Denote by $\tilde{f}$ the map from $\mathbb{R}$ to $\tilde{\mathbb{R}}$. Since $\tilde{\mathbb{R}}$ has a globally defined smooth chart $(\mathbb{R}, \psi)$, we consider the composition $\psi \circ \tilde{f} = \psi \circ f$. Both $\psi$ and $f$ are smooth maps from $\mathbb{R}$ to $\mathbb{R}$ in the standard sense, hence their composition is smooth. Therefore, $\tilde{f}$ is smooth.
+            
+            \item Suppose first that $f \circ \psi^{-1}$ is smooth. We aim to show that $f^{(n)}(0) = 0$ whenever $n$ is not an integral multiple of $3$, using the Faà di Bruno formula:
+            \[
+            \frac{\mathrm{d}^n}{\mathrm{d}x^n} F(G(x)) = \sum \frac{n!}{m_1!1!^{m_1} \, m_2!2!^{m_2} \cdots m_n!n!^{m_n}} 
+            \cdot F^{(m_1 + \cdots + m_n)}(G(x)) 
+            \cdot \prod_{j=1}^{n} \left( G^{(j)}(x) \right)^{m_j},
+            \]
+            where the sum ranges over all nonnegative integers $m_1, \ldots, m_n$ such that
+            \[
+            1 \cdot m_1 + 2 \cdot m_2 + \cdots + n \cdot m_n = n.
+            \]
+            Since $f = f \circ \psi^{-1} \circ \psi$, we set $F = f \circ \psi^{-1}$ and $G = \psi$. Note that $G^{(j)}(0) \neq 0$ if and only if $j = 3$. For $n = 3k+1$ or $n = 3k+2$, any choice of $(m_1, \ldots, m_n)$ satisfying the above condition must include some $m_j \neq 0$ with $j \neq 3$. Therefore, every term in the sum evaluates to zero at $x = 0$, which implies that $f^{(n)}(0) = 0$ whenever $n$ is not divisible by $3$.
+
+            Suppose $f^{(n)}(0) = 0$ whenever $n$ is not an integral multiple of $3$. We now show that $f \circ \psi^{-1}$ is smooth. Since $f$ is smooth, by Taylor's theorem we have
+            \[
+            f(x) = \sum_{k=0}^{n} \frac{f^{(3k)}(0)}{(3k)!} x^{3k} + x^{3n+1} g(x),
+            \]
+            where $g(x)$ is smooth. Substituting $x$ with $x^{1/3}$ gives
+            \[
+            f \circ \psi^{-1}(x) = f(x^{1/3}) = \sum_{k=0}^{n} \frac{f^{(3k)}(0)}{(3k)!} x^{k} + x^{n + \frac{1}{3}} g(x^{1/3}).
+            \]
+            It suffices to show that for any $n \in \mathbb{N}$, the function $x^{n + \frac{1}{3}} g(x^{1/3})$ lies in $C^n(\mathbb{R})$. We prove this by induction.
+
+            For the base case $n = 0$, the function $x^{1/3} g(x^{1/3})$ is continuous, since both $x^{1/3}$ and $g(x^{1/3})$ are continuous. 
+
+            Now suppose the statement holds for $n = k$, i.e., if $g \in C^k(\mathbb{R})$, then $x^{k + \frac{1}{3}} g(x^{1/3}) \in C^k(\mathbb{R})$. We aim to show the case for $n = k + 1$. Note that $g \in C^{k+1}(\mathbb{R})$ implies $g(x) \in C^k(\mathbb{R})$ and $xg'(x) \in C^k(\mathbb{R})$ as well.
+
+            By the chain rule, we compute the derivative:
+            \[
+            \frac{\mathrm{d}}{\mathrm{d}x}\left( x^{k + \frac{1}{3}} g(x^{\frac{1}{3}}) \right) 
+            = \left(k + \frac{1}{3}\right) x^{k - \frac{2}{3}} g(x^{\frac{1}{3}}) + \tfrac{1}{3} x^{k - \frac{1}{3}} g'(x^{\frac{1}{3}}).
+            \]
+            By the inductive hypothesis, both terms on the right-hand side belong to $C^k(\mathbb{R})$. Hence, the derivative lies in $C^k(\mathbb{R})$, which implies $x^{k + \frac{1}{3}} g(x^{1/3}) \in C^{k+1}(\mathbb{R})$. 
+
+            This completes the induction, and thus $f \circ \psi^{-1}$ is smooth.
+        \end{enumerate}
+    \end{proof}
+\end{problem}
+
+%2-6
+\begin{problem}
+    Let $P \colon \mathbb{R}^{n+1} \setminus \{0\} \to \mathbb{R}^{k+1} \setminus \{0\}$ be a smooth function, and suppose that for some $d \in \mathbb{Z}$, $P(\lambda x) = \lambda^d P(x) \quad \text{for all } \lambda \in \mathbb{R} \setminus \{0\},\ x \in \mathbb{R}^{n+1} \setminus \{0\}$.(Such a function is said to be \emph{homogeneous of degree} $d$.) Show that the map $\tilde{P} \colon \mathbb{RP}^n \to \mathbb{RP}^k$ defined by $\tilde{P}([x]) = [P(x)]$ is well-defined and smooth.
+
+    \begin{proof}
+    To show that $\tilde{P}$ is well-defined, suppose $x, y \in \mathbb{R}^{n+1} \setminus \{0\}$ and $[x] = [y]$ in $\mathbb{RP}^n$. Then there exists $\lambda \in \mathbb{R} \setminus \{0\}$ such that $x = \lambda y$. Using the homogeneity of $P$, we compute:
+    \[
+    \tilde{P}([x]) = [P(x)] = [P(\lambda y)] = [\lambda^d P(y)] = [P(y)] = \tilde{P}([y]).
+    \]
+    Thus, $\tilde{P}$ is well-defined.
+
+    We now show that $\tilde{P}$ is continuous. Consider the commutative diagram:
+    \[
+    \begin{tikzcd}
+    \mathbb{R}^{n+1} \setminus \{0\} \arrow[r, "P"] \arrow[d, "\pi"'] & \mathbb{R}^{k+1} \setminus \{0\} \arrow[d, "\pi"] \\
+    \mathbb{RP}^n \arrow[r, "\tilde{P}"'] & \mathbb{RP}^k
+    \end{tikzcd}
+    \]
+    where $\pi$ denotes the canonical projection $\pi(x) = [x]$. Since both $P$ and $\pi$ are continuous, and $\pi \circ P = \tilde{P} \circ \pi$, it follows from the universal property of quotient maps that $\tilde{P}$ is continuous.
+
+    To show that $\tilde{P}$ is smooth, we examine it in local coordinates. Let $[x] \in \mathbb{RP}^n$, and choose a standard coordinate chart $(U_i, \varphi_i)$ around $[x]$, where
+    \[
+    U_i = \{ [x^1:\dots:x^{n+1}] \in \mathbb{RP}^n \mid x^i \ne 0 \}, \quad \varphi_i([x]) = \left( \frac{x^1}{x^i}, \dots, \widehat{\frac{x^i}{x^i}}, \dots, \frac{x^{n+1}}{x^i} \right).
+    \]
+    Similarly, let $(U_j, \varphi_j)$ be a coordinate chart on $\mathbb{RP}^k$ containing $\tilde{P}([x])$. Then on the domain $\varphi_i(U_i \cap \tilde{P}^{-1}(U_j))$, the coordinate representation of $\tilde{P}$ is given by:
+    \begin{align*}
+    \varphi_j \circ \tilde{P} \circ \varphi_i^{-1}(u^1, \dots, u^n) 
+    &= \varphi_j \circ \tilde{P}([u^1, \dots, u^{i-1}, 1, u^i, \dots, u^n]) \\
+    &= \varphi_j \circ [P(u)] \\
+    &= \varphi_j \circ [P^1(u), \dots, P^{k+1}(u)] \\
+    &= \frac{1}{P^j(u)} \left( P^1(u), \dots, \widehat{P^j(u)}, \dots, P^{k+1}(u) \right).
+    \end{align*}
+    On this chart, $P^j(u) \ne 0$ by construction, and each $P^l(u)$ is a smooth function of $u$. Therefore, the expression above is smooth, which proves that $\tilde{P}$ is smooth.
+    \end{proof}
+\end{problem}
+
+%2-7
+\begin{problem}
+    Let $M$ be a nonempty smooth $n$-manifold with or without boundary, and suppose $n \geq 1$. Show that the vector space $C^\infty(M)$ of smooth real-valued functions on $M$ is infinite-dimensional.[Hint: Show that if $f_1, \dots, f_k$ are elements of $C^\infty(M)$ with nonempty disjoint supports, then they are linearly independent.]
+    
+    \begin{proof}
+        Suppose \( f_1, \dots, f_k \in C^\infty(M) \) are smooth functions with nonempty, pairwise disjoint supports. We claim that these functions are linearly independent.
+
+        Consider a linear combination \( f = a_1 f_1 + \dots + a_k f_k \) that is identically zero on \( M \). Fix \( i \in \{1, \dots, k\} \), and choose a point \( x \in \operatorname{supp}(f_i) \), which is nonempty by assumption. Since the supports of the \( f_j \) are disjoint, we have \( f_j(x) = 0 \) for all \( j \neq i \). Then
+        \[
+            0 = f(x) = a_i f_i(x).
+        \]
+        Because \( f_i(x) \neq 0 \), it follows that \( a_i = 0 \). Since this holds for each \( i \), all coefficients \( a_1, \dots, a_k \) must be zero, and hence \( f_1, \dots, f_k \) are linearly independent.
+
+        To construct infinitely many such functions, observe that every smooth manifold is locally Euclidean. Therefore, for any \( n \geq 1 \), we can choose countably many pairwise disjoint open subsets \( U_1, U_2, \dots \subset M \), each diffeomorphic to an open ball in \( \mathbb{R}^n \). Within each \( U_i \), we can find a smooth bump function \( f_i \in C^\infty(M) \) with compact support contained in \( U_i \).
+
+        These bump functions \( f_1, f_2, \dots \) are smooth, have disjoint (and nonempty) supports, and hence are linearly independent by the argument above. Therefore, \( C^\infty(M) \) contains an infinite linearly independent set and is thus infinite-dimensional.
+    \end{proof}
+\end{problem}
+
+%2-8
+\begin{problem}
+    Define $F \colon \mathbb{R}^n \to \mathbb{RP}^n$  by $F(x^1, \dots, x^n) = [x^1 , \dots , x^n , 1]$.
+    Show that $F$ is a diffeomorphism onto a dense open subset of $\mathbb{RP}^n$. Do the same for $G \colon \C^n \to \mathbb{CP}^n$ defined by $G(z^1, \dots, z^n) = [z^1 , \dots , z^n , 1]$(see \cref{problem:1-9})
+
+    \begin{proof}
+        The map \( F \colon \mathbb{R}^n \to \mathbb{RP}^n \) given by  
+        \[
+            F(x^1, \dots, x^n) = [x^1, \dots, x^n, 1]
+        \]
+        is a diffeomorphism onto its image. In fact, this image is precisely the standard coordinate chart \( U_{n+1} \subseteq \mathbb{RP}^n \), defined by
+        \[
+            U_{n+1} = \left\{ [x^1 , \cdots , x^{n+1}] \in \mathbb{RP}^n \colon x^{n+1} \neq 0 \right\}.
+        \]
+        The coordinate chart map \( \varphi_{n+1} \colon U_{n+1} \to \mathbb{R}^n \) is defined by
+        \[
+            \varphi_{n+1}([x^1 : \cdots : x^{n+1}]) = \left( \frac{x^1}{x^{n+1}}, \dots, \frac{x^n}{x^{n+1}} \right).
+        \]
+        One can easily check that \( F \) is the inverse of \( \varphi_{n+1} \), so \( F \) is a diffeomorphism from \( \mathbb{R}^n \) onto \( U_{n+1} \).
+
+        We now show that \( U_{n+1} \) is a dense open subset of \( \mathbb{RP}^n \). By definition, \( U_{n+1} \) is open in \( \mathbb{RP}^n \), so it remains to show that it is dense. That is, for any non-empty open subset \( V \subseteq \mathbb{RP}^n \), we must show that \( V \cap U_{n+1} \neq \emptyset \).
+
+        Consider the canonical projection map \( \pi \colon \mathbb{R}^{n+1} \setminus \{0\} \to \mathbb{RP}^n \), which is surjective and continuous. Let us define the subset
+        \[
+            \tilde{U}_{n+1} = \left\{ x \in \mathbb{R}^{n+1} \setminus \{0\} \colon x^{n+1} \neq 0 \right\}.
+        \]
+        Note that
+        \[
+            \pi^{-1}(U_{n+1}) = \tilde{U}_{n+1}.
+        \]
+        For any open set \( V \subseteq \mathbb{RP}^n \), we consider the preimage
+        \[
+            \pi^{-1}(V \cap U_{n+1}) = \pi^{-1}(V) \cap \pi^{-1}(U_{n+1}) = \pi^{-1}(V) \cap \tilde{U}_{n+1}.
+        \]
+        Since \( \pi^{-1}(V) \) is open in \( \mathbb{R}^{n+1} \setminus \{0\} \), and \( \tilde{U}_{n+1} \) is dense there, their intersection is non-empty. Hence,
+        \[
+            V \cap U_{n+1} \neq \emptyset,
+        \]
+        showing that \( U_{n+1} \) is dense in \( \mathbb{RP}^n \).
+
+        The proof for the complex case is entirely analogous.
+    \end{proof}
+\end{problem}
+
+%2-9
+\begin{problem}
+    Given a polynomial $p$ in one variable with complex coefficients, not identically zero, show that there is a unique smooth map $\tilde{p} \colon \mathbb{CP}^1 \to \mathbb{CP}^1$ that makes the following diagram commute, where $\mathbb{CP}^1$ is 1-dimensional complex projective space and $G \colon \C \to \mathbb{CP}^1$ is the map of \cref{problem:2-8}:
+    \[
+    \begin{tikzcd}
+    \C \arrow[r, "G"] \arrow[d, "p"'] & \mathbb{CP}^1 \arrow[d, "\tilde{p}"] \\
+    \C \arrow[r, "G"'] & \mathbb{CP}^1
+    \end{tikzcd}
+    \]
+    \begin{proof}
+    Let \( p(z) = a_0 + a_1 z + \dots + a_d z^d \) be a nonzero complex polynomial. Define a map \( \tilde{p} \colon \mathbb{CP}^1 \to \mathbb{CP}^1 \) by
+    \[
+    \tilde{p}([z, w]) = [a_0 w^d + a_1 z w^{d-1} + \dots + a_d z^d , w^d] = [p_h(z,w), w^d],
+    \]
+    where \( p_h(z,w) \) is the homogenization of \( p \), so that \( p_h(z,1) = p(z) \).
+
+    This map is well-defined and smooth on \( \mathbb{CP}^1 \) because of \cref{problem:2-6}.
+
+    For any \( z \in \mathbb{C} \), we have \( G(z) = [z , 1] \), so
+    \[
+    \tilde{p}(G(z)) = \tilde{p}([z , 1]) = [p(z) , 1] = G(p(z)).
+    \]
+    Therefore, \( \tilde{p} \circ G = G \circ p \), and the diagram commutes.
+
+    Uniqueness follows from the fact that \( G(\mathbb{C}) = \{ [z , 1] \mid z \in \mathbb{C} \} \) is an open dense subset of \( \mathbb{CP}^1 \), and any smooth map \( \tilde{p} \) agreeing with \( G \circ p \) on this subset must coincide with the above construction everywhere on \( \mathbb{CP}^1 \).
+\end{proof}
+\end{problem}
+
+%2-10
+\begin{problem}
+    For any topological space $M$, let $C(M)$ denote the algebra of continuous functions $f \colon M \to \R$. Given a continuous map $F \colon M \to N$, define $F^* \colon C(N) \to C(M)$ by $F^*(f) = f \circ F$.
+    \begin{enumerate}
+        \item Show that $F^*$ is a linear map.
+        \item Suppose $M$ and $N$ are smooth manifolds. Show that $F \colon M \to N$ is smooth if and only if $F^*(C^\infty(N)) \subseteq C^\infty(M)$.
+        \item Suppose $F \colon M \to N$ is a homeomorphism between smooth manifolds. Show that it is a diffeomorphism if and only if $F^*$ restricts to an isomorphism from $C^\infty(N)$ to $C^\infty(M)$.
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item It's trivial.
+            \item Suppose first that $F \colon M \to N$ is smooth. Then for any $f \in C^\infty(N)$, the composition $f \circ F \in C^\infty(M)$, so $F^*(f) = f \circ F$ is smooth. Hence, $F^*(C^\infty(N)) \subseteq C^\infty(M)$.
+
+            Conversely, suppose that $F^*(C^\infty(N)) \subseteq C^\infty(M)$. Let $p \in M$ be arbitrary, and let $q = F(p)$. Choose a smooth coordinate chart $(V, \psi)$ around $q$, where $\psi = (y^1, \dots, y^n) \colon V \to \mathbb{R}^n$. For each component function $y^i \colon V \to \mathbb{R}$, choose a smooth bump function $\rho$ supported in $V$, such that $\rho \equiv 1$ on a smaller neighborhood $\tilde{V} \subseteq V$ of $q$.
+
+            Define the function $\tilde{y}^i = \rho y^i$. Then $\tilde{y}^i$ extends to a smooth function on all of $N$, and agrees with $y^i$ on $\tilde{V}$. By assumption, $\tilde{y}^i \circ F \in C^\infty(M)$. Since $F$ is continuous, there exists a neighborhood $U \subseteq M$ of $p$ such that $F(U) \subseteq \tilde{V}$. On $U$, we have
+            \[
+                y^i \circ F = \tilde{y}^i \circ F,
+            \]
+            so $y^i \circ F$ is smooth on $U$. This shows that each component function of $\psi \circ F$ is smooth in a neighborhood of $p$, so $F$ is smooth at $p$. Since $p$ was arbitrary, it follows that $F$ is smooth.
+            \item Suppose $F$ is a diffeomorphism, let $G = F^{-1}$ and define $G^* \colon C^\infty(M) \to C^\infty(N)$ by $G^*(g) = g \circ G$. By (a), $G^*$ is a linear map and it is easy to verify that $G^*$ is the inverse of $F^*$, thus $F^*$ is a isomorphism.
+            
+            Suppose $F^*$ is an isomorphism between $C^\infty(N)$ and $C^\infty(M)$, since $F$ is a homeomorphism, by (b), it suffices to show that $G^*(C^\infty(M)) \subseteq C^\infty(N)$. Since $F^*$ is an isomorphism ,for any $g \in C^\infty(M)$, there exists $f \in C^\infty(N)$ such that $ g = F^*(f)$. Thus 
+            $$ G^*(g) = G^*(F^*(f)) = G^*(f \circ F) = f \circ F \circ G = f \in C^\infty(N)$$
+            and $F$ is a diffeomorphism.
+        \end{enumerate}
+    \end{proof}
+\end{problem}
+
+%2-11
+\begin{problem}
+    Suppose $V$ is a real vector space of dimension $n \geq 1$. 
+    Define the projectivization of $V$, denoted by $\mathbb{P}(V)$, to be the set of 1-dimensional linear subspaces of $V$, with the quotient topology induced by the map $\pi \colon V \setminus \{0\} \to \mathbb{P}(V)$ that sends $x$ to its span. 
+    (Thus $\mathbb{P}(\R^n)= \mathbb{RP}^{n-1}$.) Show that $\mathbb{P}(V)$ is a topological ($n-1$)-manifold, and has a unique smooth structure with the property that for each basis $(E_1, \dots, E_n)$ for $V$, the map $E \colon \mathbb{RP}^{n-1} \to \mathbb{P}(V)$ defined by $E[v^1, \dots, v^n] = [v^i E_i]$ (where brackets denote equivalence classes) is a diffeomorphism.
+
+    \begin{proof}
+        \begin{itemize}
+            \item \textbf{$\mathbb{P}(V)$ is a topological $(n-1)$-manifold.}\\
+            Fix a basis $(E_1, \dots, E_n)$ of $V$. This determines a linear isomorphism $\varphi_B \colon \mathbb{R}^n \to V$ given by $\varphi_B(v^1, \dots, v^n) = \sum v^i E_i$. This isomorphism equips $V$ with a topology via pullback from $\mathbb{R}^n$, and restricts to a homeomorphism $\mathbb{R}^n \setminus \{0\} \to V \setminus \{0\}$.
+
+            Consider the standard projection maps $\pi_{\mathbb{R}^n} \colon \mathbb{R}^n \setminus \{0\} \to \mathbb{RP}^{n-1}$ and $\pi_V \colon V \setminus \{0\} \to \mathbb{P}(V)$. These induce a map
+            \[
+                \widetilde{\varphi}_B \colon \mathbb{RP}^{n-1} \to \mathbb{P}(V), \quad [x] \mapsto [\varphi_B(x)].
+            \]
+            This map is well-defined because scalar multiplication is preserved under $\varphi_B$, and it is bijective because $\varphi_B$ is an isomorphism. By the universal property of quotient maps, $\widetilde{\varphi}_B$ is continuous, and so is its inverse. Thus, $\widetilde{\varphi}_B$ is a homeomorphism. Since $\mathbb{RP}^{n-1}$ is a topological $(n-1)$-manifold, so is $\mathbb{P}(V)$.
+            \item \textbf{Existence of a smooth structure.}\\
+            We define a smooth structure on $\mathbb{P}(V)$ by pulling back the standard smooth structure from $\mathbb{RP}^{n-1}$ via $\widetilde{\varphi}_B$. That is, a chart $(U, \psi)$ on $\mathbb{P}(V)$ is declared smooth if and only if $(\widetilde{\varphi}_B^{-1}(U), \psi \circ \widetilde{\varphi}_B)$ is a smooth chart on $\mathbb{RP}^{n-1}$. By construction, $\widetilde{\varphi}_B$ is a diffeomorphism.
+
+            Now let $(F_1, \dots, F_n)$ be another basis of $V$, and define
+            \[
+                F \colon \mathbb{RP}^{n-1} \to \mathbb{P}(V), \quad [v^1, \dots, v^n] \mapsto [v^i F_i].
+            \]
+            Since both $(E_1, \dots, E_n)$ and $(F_1, \dots, F_n)$ are bases of $V$, there exists an invertible matrix $A \in GL(n, \mathbb{R})$ such that $F_i = A^j_i E_j$. Define a map $P \colon \mathbb{RP}^{n-1} \to \mathbb{RP}^{n-1}$ by $P([v]) = [Av]$. This is a diffeomorphism by \cref{problem:2-6}.
+
+            Observe that the map $F$ can be written as the composition
+            \[
+                [v] \xmapsto{P} [Av] \xmapsto{\widetilde{\varphi}_B} [A^j_i v^i E_j] = [v^i F_i],
+            \]
+            i.e., $F = \widetilde{\varphi}_B \circ P$. Since both $\widetilde{\varphi}_B$ and $P$ are diffeomorphisms, it follows that $F$ is a diffeomorphism.            
+            \item \textbf{Uniqueness of the smooth structure.}\\
+            Let $\mathcal{S}$ denote the smooth structure constructed above. Suppose there is another smooth structure $\mathcal{S}'$ on $\mathbb{P}(V)$ such that for every basis $B$ of $V$, the map $\widetilde{\psi}_B \colon \mathbb{RP}^{n-1} \to \mathbb{P}(V)$ is a diffeomorphism with respect to $\mathcal{S}'$. Then the identity map
+            \[
+                \mathrm{id} = \widetilde{\varphi}_B \circ \widetilde{\psi}_B^{-1} \colon (\mathbb{P}(V), \mathcal{S}') \to (\mathbb{P}(V), \mathcal{S})
+            \]
+            is a diffeomorphism. Therefore, $\mathcal{S}' = \mathcal{S}$. This shows that the smooth structure on $\mathbb{P}(V)$ is uniquely determined by the property that for every basis $B$, the map $\widetilde{\psi}_B$ is a diffeomorphism.
+        \end{itemize}
+    \end{proof}
+\end{problem}
+
+%2-12
+\begin{problem}
+    State and prove an analogue of \cref{problem:2-11} for complex vector spaces.
+    \begin{proof}
+        The proof is analogous to the real case in \cref{problem:2-11}
+    \end{proof}
+\end{problem}
+
+%2-13
+\begin{problem}
+    Suppose M is a topological space with the property that for every indexed open cover $\mathcal{X}$ of $M$, there exists a patition of unity subordinate to $\mathcal{X}$. Show that $M$ is paracompact.
+    \begin{proof}
+        Let \( \mathcal{X} = \{X_\alpha\}_{\alpha \in A} \) be an arbitrary open cover of \( M \), and let \( \{\psi_\alpha\}_{\alpha \in A} \) be a partition of unity subordinate to \( \mathcal{X} \). For each \( \alpha \in A \), define the open set
+        \[
+        U_\alpha = \{ p \in M \colon \psi_\alpha(p) > 0 \}.
+        \]
+        Then \( \{U_\alpha\}_{\alpha \in A} \) is an open cover of \( M \), since each $\psi_\alpha$ is nonnegative, for any \( p \in M \), we have \( \sum_\alpha \psi_\alpha(p) = 1 \), there exists some \( \alpha \) such that \( \psi_\alpha(p) > 0 \), i.e., \( p \in U_\alpha \).
+        Furthermore, since \( U_\alpha \subseteq \operatorname{supp}(\psi_\alpha) \subseteq X_\alpha \), it follows that \( \{U_\alpha\}_{\alpha \in A} \) is a refinement of \( \mathcal{X} \).
+        Finally, the collection \( \{\operatorname{supp}(\psi_\alpha)\}_{\alpha \in A} \) is locally finite by the definition of a partition of unity. Since \( U_\alpha \subseteq \operatorname{supp}(\psi_\alpha) \), the subcollection \( \{U_\alpha\}_{\alpha \in A} \) is also locally finite.
+        Therefore, \( \{U_\alpha\}_{\alpha \in A} \) is a locally finite open refinement of \( \mathcal{X} \). Since \( \mathcal{X} \) was arbitrary, this proves that \( M \) is paracompact.
+    \end{proof}
+\end{problem}
+
+%2-14
+\begin{problem}
+    Suppose $A$ and $B$ are disjoint closed subsets of a smooth manifold $M$. Show that there exists $f \in C^\infty(M)$ such that $0 \geq f(x) \geq 1$ for all $x \in M$, $f^{-1}(0) = A$, and $f^{-1}(1) = B$.
+
+    \begin{proof}
+        By Theorem 2.29, there exist smooth, nonnegative functions $f_A, f_B \in C^\infty(M)$ such that $f_A^{-1}(0) = A$ and $f_B^{-1}(0) = B$.
+
+        Define a smooth function $f \colon M \to \mathbb{R}$ by
+        \[
+            f = \frac{f_A}{f_A + f_B}.
+        \]
+        Since both $f_A$ and $f_B$ are smooth and nonnegative, and their sum is strictly positive everywhere (because $A$ and $B$ are disjoint), the function $f$ is well-defined and smooth on all of $M$.
+
+        Now, consider the behavior of $f$ on different subsets of $M$:
+        \begin{itemize}
+            \item If $x \in A$, then $f_A(x) = 0$ and $f_B(x) > 0$, so $f(x) = 0$.
+            \item If $x \in B$, then $f_B(x) = 0$ and $f_A(x) > 0$, so $f(x) = 1$.
+            \item If $x \in M \setminus (A \cup B)$, then both $f_A(x)$ and $f_B(x)$ are strictly positive, so $f(x) \in (0,1)$.
+        \end{itemize}
+        Therefore, $f \in C^\infty(M)$ satisfies $0 \leq f(x) \leq 1$ for all $x \in M$, with $f^{-1}(0) = A$ and $f^{-1}(1) = B$, as required.
+    \end{proof}
 \end{problem}

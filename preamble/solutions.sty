@@ -63,10 +63,14 @@
 \renewenvironment{proof}{%
     \par\addvspace{0.5em}%
     \noindent%
-    \textbf{Proof}% 固定标题 "Proof:"
-    \quad\ignorespaces%
+    \textbf{Proof}\quad%
+    \begingroup
+    \setlength{\parindent}{0pt}% 取消首行缩进
+    \ignorespaces
 }{%
-    \hfill$\square$% 证毕符号
+    \par
+    \endgroup
+    \hfill$\square$%
     \par\addvspace{1em}%
 }
 
