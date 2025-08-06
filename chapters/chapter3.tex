@@ -2,20 +2,293 @@
 
 %3-1
 \begin{problem}
-    Suppose $M$ and $N$ are smooth manifolds with or without boundary, and $F \colon M \to N$ is a smooth map. Show that $dF_p \colon T_pM \to T_{F(p)}N$ is the zero map for each $p \in M$ if and only if $F$ is constant on each component of $M$.
+    Suppose $M$ and $N$ are smooth manifolds with or without boundary, and $F \colon M \to N$ is a smooth map. Show that $\mathrm{d}F_p \colon T_pM \to T_{F(p)}N$ is the zero map for each $p \in M$ if and only if $F$ is constant on each component of $M$.
+    \begin{proof}
+        \begin{itemize}
+            \item[\textbf{($\Rightarrow$)}] Suppose that \( F \colon M \to N \) is constant on each connected component of \( M \). Fix any point \( p \in M \), and let \( X \in T_pM \) be a tangent vector. Since \( F \) is constant in a neighborhood of \( p \), for any smooth function \( f \in C^\infty(N) \), the composition \( f \circ F \) is locally constant near \( p \). Therefore,
+            \[
+            \mathrm{d}F_p(X)(f) = X(f \circ F) = 0.
+            \]
+            This holds for all \( f \in C^\infty(N) \), so \( \mathrm{d}F_p(X) = 0 \). Hence, \( \mathrm{d}F_p = 0 \) at every \( p \in M \).
+            \item[\textbf{($\Leftarrow$)}] Now suppose that \( \mathrm{d}F_p = 0 \) for all \( p \in M \). We want to show that \( F \) is constant on each connected component of \( M \).
+
+            Fix a point \( p \in M \). Since \( \mathrm{d}F_p = 0 \), the differential in local coordinates is also zero. Choose smooth charts \( (U, \varphi) \) around \( p \in M \) and \( (V, \psi) \) around \( F(p) \in N \), such that \( F(U) \subseteq V \), and
+            \[
+            \varphi(U) = 
+            \begin{cases}
+            B^n \subset \mathbb{R}^n, & \text{if } p \text{ is an interior point}, \\
+            B^n \cap \mathbb{H}^n, & \text{if } p \text{ is a boundary point},
+            \end{cases}
+            \]
+            where \( B^n \) is an open ball centered at the origin in \( \mathbb{R}^n \). Let \( \widehat{F} = \psi \circ F \circ \varphi^{-1} \colon \varphi(U) \to \psi(V) \) denote the coordinate expression of \( F \).
+
+            Then \( \widehat{F} \) is a smooth map between open subsets of Euclidean space, and since \( \mathrm{d}F_p = 0 \), we have that the Jacobian matrix \( D\widehat{F} \) is zero at all points in \( \varphi(U) \). Therefore, each component function \( \widehat{F}^j \) has vanishing partial derivatives on \( \varphi(U) \), i.e.,
+            \[
+            \frac{\partial \widehat{F}^j}{\partial x^i} = 0 \quad \text{for all } i,j.
+            \]
+            It follows that each \( \widehat{F}^j \) is constant on \( \varphi(U) \), so \( \widehat{F} \) is constant on \( \varphi(U) \), and hence \( F \) is constant on \( U \).
+
+            Therefore, \( F \) is \emph{locally constant} on \( M \). But any locally constant function on a connected topological space is constant. Hence, \( F \) is constant on each connected component of \( M \).
+
+        \end{itemize}
+    \end{proof}
 \end{problem}
 
 %3-2
 \begin{problem}
     Prove Proposition 3.14(the tangent space to a product manifold).
+    \begin{proof}
+        It is clear that \( \alpha \) is a linear map, and both the domain and codomain have the same dimension:
+        \[
+        \dim T_p(M_1 \times \dots \times M_k) = \sum_{i=1}^k \dim T_{p_i}M_i.
+        \]
+        Therefore, it suffices to show that \( \alpha \) is surjective.
+
+        Let \( v_i \in T_{p_i}M_i \) for each \( i = 1, \dots, k \). For each \( v_i \), there exists a smooth curve \( c_i \colon (-\varepsilon_i, \varepsilon_i) \to M_i \) such that \( c_i(0) = p_i \) and \( c_i'(0) = v_i \). Let \( \varepsilon = \min\{\varepsilon_1, \dots, \varepsilon_k\} \), and define a smooth curve
+        \[
+        c \colon (-\varepsilon, \varepsilon) \to M_1 \times \dots \times M_k, \quad t \mapsto (c_1(t), \dots, c_k(t)).
+        \]
+        Then \( c(0) = p \), and define \( v := c'(0) \in T_p(M_1 \times \dots \times M_k) \). By the definition of \( \alpha \), we have
+        \[
+        \alpha(v) = \left(\dd{(\pi_1)}_p(c'(0)), \dots, \dd{(\pi_k)}_p(c'(0)) \right).
+        \]
+        Since \( \pi_i \circ c = c_i \), we compute:
+        \[
+        \mathrm{d}(\pi_i)_p(c'(0)) = \left. \frac{\dd}{\dd{t}}\right|_{t=0} (\pi_i \circ c)(t) = c_i'(0) = v_i.
+        \]
+        Therefore, \( \alpha(v) = (v_1, \dots, v_k) \), so \( \alpha \) is surjective. As a linear map between vector spaces of the same finite dimension, surjectivity implies bijectivity. Hence, \( \alpha \) is an isomorphism.
+    \end{proof}
 \end{problem}
 
 %3-3
 \begin{problem}
     Prove that if $M$ and $N$ are smooth manifolds, then $T(M \times N)$ is diffeomorphism to $TM \times TN$.
+    \begin{proof}
+    We define a map
+    \[
+        \Phi \colon T(M \times N) \to TM \times TN
+    \]
+    by sending a tangent vector at a point \((p, q) \in M \times N\),
+    \[
+        \Phi(v) = \left( \pi_{M \times N}(v), \dd{\pi}_M(v) \right) \times \left( \pi_{M \times N}(v), \dd{\pi}_N(v) \right),
+    \]
+    where \( \pi_M: M \times N \to M \), \( \pi_N: M \times N \to N \) are the natural projections, and \( \dd{\pi}_M \), \( \dd{\pi}_N \) are the differentials.
+
+    More concretely, under the standard identification of tangent spaces of a product manifold, for any \( (p, q) \in M \times N \),
+    \[
+        T_{(p,q)}(M \times N) \cong T_pM \oplus T_qN.
+    \]
+    So any vector \( v \in T_{(p,q)}(M \times N) \) can be written as \( v = (v_M, v_N) \), where \( v_M \in T_pM \), \( v_N \in T_qN \). Then we define
+    \[
+        \Phi((p,q), v) = ((p, v_M), (q, v_N)) \in TM \times TN.
+    \]
+
+    This map is clearly bijective: given any \( (p, v_M) \in TM \) and \( (q, v_N) \in TN \), we can construct \( ((p, q), (v_M, v_N)) \in T(M \times N) \), which is the inverse of \( \Phi \).
+
+    To show that \( \Phi \) is a diffeomorphism, we check smoothness in local coordinates. Let \( (U, \varphi) \) be a coordinate chart on \( M \), and \( (V, \psi) \) a chart on \( N \). Then \( (U \times V, \varphi \times \psi) \) is a chart on \( M \times N \), and the corresponding tangent bundle charts are
+    \[
+        T(U) \cong \varphi(U) \times \mathbb{R}^{\dim M}, \quad T(V) \cong \psi(V) \times \mathbb{R}^{\dim N}, \quad T(U \times V) \cong \varphi(U) \times \psi(V) \times \mathbb{R}^{\dim M + \dim N}.
+    \]
+    In these coordinates, \( \Phi \) acts as the identity map:
+    \[
+        \Phi(x, y, v, w) = ((x, v), (y, w)),
+    \]
+    where \( x = \varphi(p) \), \( y = \psi(q) \), \( v \in \mathbb{R}^{\dim M} \), and \( w \in \mathbb{R}^{\dim N} \). This is clearly a diffeomorphism in Euclidean space.
+
+    Therefore, \( \Phi \) is a diffeomorphism globally, and we conclude that
+    \[
+        T(M \times N) \cong TM \times TN
+    \]
+    as smooth manifolds.
+\end{proof}
 \end{problem}
 
 %3-4
 \begin{problem}
     Show that $T\Sph^1$ is diffeomorphic to $\Sph^1 \times \R$.
+\begin{proof}
+    We prove that \(T\Sph^1\) is diffeomorphic to \(\Sph^1 \times \mathbb{R}\) by constructing a global trivialization using coordinate charts.
+
+    Consider the standard embedding \(\Sph^1 \subset \mathbb{C}\), where each point can be written as \(e^{it}\) for some \(t \in \mathbb{R}\). Define two coordinate charts:
+    \begin{align*}
+        U_1 &= \Sph^1 \setminus \{ -1 \},  \quad \varphi_1(e^{it}) = t \in (-\pi, \pi), \\
+        U_2 &= \Sph^1 \setminus \{ 1 \},  \quad \varphi_2(e^{it}) = t \in (0, 2\pi).
+    \end{align*}
+
+    For any \((p, v) \in T\Sph^1\), we define a map
+    \[
+        \Phi: T\Sph^1 \to \Sph^1 \times \mathbb{R}, \quad \Phi(p, v) = (p, w),
+    \]
+    where \(w\) is the coordinate representation of \(v\) in any chart where \(p \in U_i\)
+    \[
+        \dd(\varphi_i)_p(v) = w \left. \frac{\dd}{\dd{t}} \right|_{\varphi_i(p)},
+    \]
+    then we define \(\Phi(p, v) = (p, w)\).
+
+    It remains to show that this is well-defined, i.e., the scalar \(w\) does not depend on the choice of coordinate chart. Suppose \(p \in U_1 \cap U_2\). Observe that $w = v \varphi_i$ and $\varphi_1 - \varphi_2$ is locally constant, it implies $v(\varphi_1-\varphi_2)=0$.
+    Hence, the value of \(w\) is the same in both charts. So \(\Phi\) is well-defined globally.
+
+    Now, we show that \(\Phi\) is a diffeomorphism. The map is clearly bijective: given any \((p, w) \in \Sph^1 \times \mathbb{R}\), define the inverse \(\Phi^{-1}(p, w) = (p, v)\), 
+    \[
+        v = \dd\varphi_i^{-1}\left(w \left. \frac{\dd}{\dd{t}} \right|_{\varphi_i(p)}\right),
+    \]
+    Since this again does not depend on the chart \(i\), the inverse is well-defined.
+
+    In local coordinates, \(\Phi\) is just the identity map \((t, w) \mapsto (t, w)\) on \(\varphi_i(U_i) \times \R\), so it is smooth, and so is its inverse.
+
+    Therefore, \(\Phi: T\Sph^1 \to \Sph^1 \times \mathbb{R}\) is a diffeomorphism.
+\end{proof}
+\end{problem}
+
+%3-5
+\begin{problem}
+    Let $\Sph^1 \subseteq \R^2$ be the unit circle, and let $K \subseteq \R^2$ be the boundary of the square of side 2 centered at the origin: $K = \{(x,y) \colon \mathrm{max}(|x|, |y|)=1\}$. Show that there is a homeomorphism $F \colon \R^2 \to \R^2$ such that $F(\Sph^1) = K$, but there is no diffeomorphism with the same property. [Hint: let $\gamma$ be a smooth curve whose image lies in $\Sph^1$, and consider the action of $\mathrm{d}F(\gamma'(t))$ on the coordinate function $x$ and $y$.]
+    \begin{proof}
+        Define $F \colon \R^2 \to \R^2$ by
+        \[
+        F(v) = 
+        \begin{cases}
+            \displaystyle \frac{\|v\|_2}{\|v\|_\infty} v & \text{if } v \neq (0,0), \\
+            (0,0) & \text{if } v = (0,0).
+        \end{cases}
+        \]
+        For any $v \in \Sph^1$, we have $\|v\|_2 = 1$, so
+        \[
+        F(v) = \frac{1}{\|v\|_\infty} v \quad \Rightarrow \quad \|F(v)\|_\infty = \frac{\|v\|_\infty}{\|v\|_\infty} = 1.
+        \]
+        Hence $F$ maps $\Sph^1$ onto $K$.
+
+        For $v \neq 0$, $F$ is clearly continuous since it is composed of continuous functions on its domain. To verify continuity at $v = 0$, observe that
+        \[
+        \|F(v) - F(0)\|_\infty = \|F(v)\|_\infty = \|v\|_2 \le \sqrt{2} \|v\|_\infty \to 0 \quad \text{as } v \to 0.
+        \]
+        Therefore, $F$ is continuous on all of $\R^2$.
+
+        The inverse of $F$ can be defined explicitly as
+        \[
+        F^{-1}(w) = 
+        \begin{cases}
+            \displaystyle \frac{\|w\|_\infty}{\|w\|_2} w & \text{if } w \neq (0,0), \\
+            (0,0) & \text{if } w = (0,0).
+        \end{cases}
+        \]
+        A similar argument shows that $F^{-1}$ is also continuous. Therefore, $F$ is a homeomorphism.
+
+        Now we show that there is no diffeomorphism $F \colon \R^2 \to \R^2$ such that $F(\Sph^1) = K$. Suppose for contradiction that such a diffeomorphism exists.
+
+        Let $\gamma \colon (-\varepsilon, \varepsilon) \to \Sph^1$ be a smooth curve with $\gamma(0) = F^{-1}(1,1)$ and $\gamma'(0) \ne 0$. Define $\eta(t) = F(\gamma(t)) = (x(t), y(t))$. Then $\eta$ is a smooth curve in $K$ with $\eta(0) = (1,1)$.
+
+        Since $(1,1)$ is a corner point of $K$, we must have:
+        \[
+        x(t) \leq 1, \quad y(t) \leq 1 \quad \text{with equalities at } t = 0.
+        \]
+        Thus, $x(t)$ and $y(t)$ each attain a local maximum at $t = 0$. By Fermat's Theorem, which states that the derivative of a smooth function must vanish at a local extremum, we get:
+        \[
+        x'(0) = y'(0) = 0.
+        \]
+
+        However, by the chain rule,
+        \[
+        \eta'(0) = \left. \frac{\dd}{\dd{t}} \right|_{t=0} F(\gamma(t)) = \dd{F}_{\gamma(0)}(\gamma'(0)).
+        \]
+        Since $F$ is a diffeomorphism, its differential $\dd{F}$ is an isomorphism at every point. Therefore, if $\gamma'(0) \ne 0$, then $\dd{F}_{\gamma(0)}(\gamma'(0)) \ne 0$, implying that $\eta'(0) \ne 0$.
+
+        This contradicts the fact that $x'(0) = y'(0) = 0$, which implies $\eta'(0) = 0$. Hence, such a diffeomorphism $F$ cannot exist.
+    \end{proof}
+\end{problem}
+
+%3-6
+\begin{problem}
+    Consider $\Sph^3$ as the unit sphere in $\C^2$ under the usual indentification $\C^2 \leftrightarrow \R^4$. For each $z = (z^1, z^2) \in \Sph^3$, define a curve $\gamma_z \colon \R \to \Sph^3$ by $\gamma_z(t) = (\mathrm{e}^{\mathrm{i}t}z^1, \mathrm{e}^{\mathrm{i}t}z^2)$. Show that $\gamma_z$ is a smooth curve whose velocity is never zero.
+    \begin{proof}
+        Under the standard identification \( \mathbb{C}^2 \cong \mathbb{R}^4 \), the curve \( \gamma_z(t) \) can be expressed as
+        \[
+        \gamma_z(t) = (a\cos t - b\sin t,\, a\sin t + b\cos t,\, c\cos t - d\sin t,\, c\sin t + d\cos t),
+        \]
+        where \( z_1 = a + b\mathrm{i} \), \( z_2 = c + d\mathrm{i} \), and the coefficients satisfy \( a^2 + b^2 + c^2 + d^2 = 1 \). Clearly, \( \gamma_z \) is a smooth map from \( \mathbb{R} \) to \( \mathbb{R}^4 \). Since \( \mathbb{S}^3 \subset \mathbb{R}^4 \) is a smooth embedded submanifold, it follows by Corollary 5.30 that \( \gamma_z \) is also a smooth map from \( \mathbb{R} \) to \( \mathbb{S}^3 \).
+
+        Identifying \( T_p\mathbb{S}^3 \) with a subspace of \( T_p\mathbb{R}^4 \), we compute the velocity vector:
+        \[
+        \gamma_z'(t) = (-a\sin t - b\cos t,\, a\cos t - b\sin t, -c\sin t - d\cos t,\, c\cos t - d\sin t).
+        \]
+        Its squared norm is
+        \[
+        |\gamma_z'(t)|^2 = a^2 + b^2 + c^2 + d^2 = 1.
+        \]
+        Therefore, the velocity of \( \gamma_z \) is never zero.
+    \end{proof}
+\end{problem}
+
+%3-7
+\begin{problem}
+    Let $M$ be a smooth manifold with or without boundary and p be a point of $M$. Let $C_p^\infty(M)$ denote the algebra of germs of smooth real-valued functions at $p$, and let $\mathcal{D}_pM$ denote the vector space of derivations of $C_p^\infty(M)$. Define a map $\Phi \colon \mathcal{D}_pM \to T_pM$ by $(\Phi v)f = v([f]_p)$. Show that $\Phi$ is an isomorphism.
+    \begin{proof}
+        It is straightforward to verify that $\Phi$ is a linear map. To prove that $\Phi$ is an isomorphism, we show that it is both injective and surjective.
+
+        \begin{itemize}
+            \item \textbf{Injectivity}: Suppose $\Phi(v) = 0$ for some $v \in \mathcal{D}_pM$. Then for any germ $[f]_p \in C_p^\infty(M)$, choose a representative $\tilde{f} \in C^\infty(U)$ defined on some neighborhood $U$ of $p$ such that $\tilde{f} \in [f]_p$. By the definition of $\Phi$, we have
+            $$
+            v([f]_p) = (\Phi(v))(\tilde{f}) = 0.
+            $$
+            Since this holds for all $[f]_p \in C_p^\infty(M)$, it follows that $v = 0$. Thus, $\Phi$ is injective.
+            \item \textbf{Surjectivity}: Let $w \in T_pM$ be an arbitrary tangent vector at $p$. Define a map $v: C_p^\infty(M) \to \mathbb{R}$ by
+            $$
+            v([f]_p) = w(\tilde{f}),
+            $$
+            where $\tilde{f}$ is any representative of the germ $[f]_p$. By Proposition 3.8 (which states that the action of a tangent vector at a point depends only on the germ of a function at that point), this definition is independent of the choice of representative, so $v$ is well-defined. It is easy to verify that $v$ is $\mathbb{R}$-linear and satisfies the Leibniz rule:
+            $$
+            v([fg]_p) = w(\widetilde{fg}) = w(\tilde{f}\tilde{g}) = \tilde{f}(p)\,w(\tilde{g}) + \tilde{g}(p)\,w(\tilde{f}) = \tilde{f}(p) v([g]_p) + \tilde{g}(p)v([f]_p),
+            $$
+            hence $v \in \mathcal{D}_pM$. Then for any $f \in C^\infty(M)$, we have
+            $$
+            \Phi(v)(f) = v([f]_p) = w(f),
+            $$
+            so $\Phi(v) = w$, and thus $\Phi$ is surjective.
+        \end{itemize}
+        Since $\Phi$ is both injective and surjective, it is an isomorphism.
+    \end{proof}
+\end{problem}
+
+%3-8
+\begin{problem}
+    Let $M$ be a smooth manifold with or without boundary and $p \in M$. Let $\mathcal{V}_pM$ denote the set of equivalence classes of smooth curves starting at $p$ under the relation $\gamma_1 \sim \gamma_2$ if $(f \circ \gamma_1)'(0) = (f \circ \gamma_2)'(0)$ for every smooth real-valued function $f$ defined in a neighborhood of $p$. Show that the map $\Psi \colon \mathcal{V}_pM \to T_pM$ defined by $\Psi[\gamma] = \gamma'(0)$ is well defined and bijective.
+    \begin{proof}
+        We first show that the map
+        \[
+        \Psi \colon \mathcal{V}_pM \to T_pM, \quad [\gamma] \mapsto \gamma'(0)
+        \]
+        is well defined. Suppose \( \gamma_1 \sim \gamma_2 \), i.e., for all \( f \in C^\infty(M) \) defined in a neighborhood of \( p \), we have
+        \[
+        (f \circ \gamma_1)'(0) = (f \circ \gamma_2)'(0).
+        \]
+        Then, for any \( f \in C^\infty(M) \),
+        \[
+        \gamma_1'(0)(f) = \left.\frac{\dd}{\dd{t}} (f \circ \gamma_1)(t) \right|_{t=0}
+        = \left.\frac{\dd}{\dd{t}} (f \circ \gamma_2)(t) \right|_{t=0}
+        = \gamma_2'(0)(f).
+        \]
+        Thus, \( \gamma_1'(0) = \gamma_2'(0) \in T_pM \), and so \( \Psi \) is well defined.
+
+        To prove that \( \Psi \) is bijective, we construct its inverse. Given any \( v \in T_pM \), by Proposition 3.23, there exists a smooth curve \( c \colon (-\varepsilon, \varepsilon) \to M \) such that \( c(0) = p \) and \( c'(0) = v \). Define
+        \[
+        \Psi^{-1}(v) = [c],
+        \]
+        the equivalence class of such a curve.
+
+        We now check that \( \Psi^{-1} \) is well defined. Suppose \( c_1(0) = c_2(0) = p \) and \( c_1'(0) = c_2'(0) = v \). Then for any \( f \in C^\infty(M) \),
+        \[
+        (f \circ c_1)'(0) = c_1'(0)(f) = c_2'(0)(f) = (f \circ c_2)'(0),
+        \]
+        so \( c_1 \sim c_2 \), hence \( [c_1] = [c_2] \).
+
+        It is straightforward to verify that \( \Psi^{-1} \) is the inverse of \( \Psi \). Indeed, for any \( [\gamma] \in \mathcal{V}_pM \), we have
+        \[
+        \Psi^{-1}(\Psi([\gamma])) = \Psi^{-1}(\gamma'(0)) = [\gamma],
+        \]
+        and for any \( v \in T_pM \), we have
+        \[
+        \Psi(\Psi^{-1}(v)) = \Psi([c]) = c'(0) = v.
+        \]
+        Therefore, \( \Psi \) is a bijection.
+    \end{proof}
 \end{problem}
