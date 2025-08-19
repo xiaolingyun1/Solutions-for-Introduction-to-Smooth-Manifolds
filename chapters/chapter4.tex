@@ -1,0 +1,427 @@
+\chapter{Submersions, Immersions, and Embeddings}
+
+%4-1
+\begin{problem}
+    Use the inclusion map $ \mathbb{H}^n \to \R^n$ to show that Theorem 4.5 does not extend to the case in which $M$ is a manifold with boundary.
+    \begin{proof}
+        Let \(p\) be the origin, \(\mathrm{d}F_p\) is clearly an isomorphism.  
+        For any neighborhood \(U\) of \(p\) in \(\mathbb{H}^n\), we have \(F(U) = U\).  
+        If \(F\) were a local diffeomorphism at \(p\) in the sense of Theorem~4.5, there would exist a neighborhood \(U \subseteq \mathbb{H}^n\) of \(p\) such that \(F(U)=U\) is an open subset of \(\mathbb{R}^n\).  
+        But if \(U\) were open in \(\mathbb{R}^n\), it would contain some open ball \(B\) centered at \(p\).  
+        This is impossible because \(U \subseteq \mathbb{H}^n\) and \(\mathbb{H}^n\) contains no open ball in \(\mathbb{R}^n\) centered at a boundary point.  
+        Hence \(F\) is not a local diffeomorphism at \(p\), showing that Theorem 4.5 does not extend to manifolds with boundary.
+    \end{proof}
+\end{problem}
+
+%4-2
+\begin{problem}
+    Suppose $M$ is a smooth manifold(without boundary), $N$ is a smooth manifold with boundary, and $F \colon M \to N$ is smooth. Show that if $p\in M$ is a point such that $\dd{F}_p$ is nonsingular, then $F(p) \in \mathrm{Int}N$.
+\begin{proof}
+First we prove the statement in Euclidean space. Suppose $U$ is an open subset of $\R^n$ and 
+$F \colon U \to \mathbb{H}^n$ is a smooth map. Let $\iota \colon \mathbb{H}^n \hookrightarrow \R^n$ 
+be the inclusion map, and define $\widehat{F} = \iota \circ F$. Clearly $\widehat{F}$ is smooth. 
+Since $\dd{\iota}$ is nonsingular everywhere, we have 
+\[
+\dd{\widehat{F}}_p = \dd{\iota}_{F(p)} \circ \dd{F}_p,
+\] 
+which is also nonsingular. By the inverse function theorem, there exist neighborhoods 
+$U_0 \subseteq U$ of $p$ and $V_0 \subseteq \R^n$ of $\widehat{F}(p)$ such that 
+$\widehat{F}|_{U_0} \colon U_0 \to V_0$ is a diffeomorphism. Since $V_0$ is an open subset of 
+$\R^n$ and $\widehat{F}(U_0) \subseteq \mathbb{H}^n$, it follows that $V_0 \cap \mathbb{H}^n$ 
+is an open subset of $\mathbb{H}^n$ containing $\widehat{F}(p)$. In particular, 
+$\widehat{F}(p) \in \mathrm{Int}\,\mathbb{H}^n$.
+
+Now we return to the manifold setting. Choose charts 
+\[
+\varphi \colon U \to \R^n \quad \text{around } p \in M,
+\qquad 
+\psi \colon V \to \mathbb{H}^n \quad \text{around } F(p) \in N.
+\]
+Then the local representative 
+\[
+\psi \circ F \circ \varphi^{-1} \colon \varphi(U) \to \mathbb{H}^n
+\]
+is smooth. By the chain rule, its differential at $\varphi(p)$ is nonsingular, so the Euclidean case applies. Hence 
+$\psi(F(p)) \in \mathrm{Int}\,\mathbb{H}^n$, which means $F(p) \in \mathrm{Int}\,N$.
+\end{proof}
+
+\end{problem}
+
+%4-3
+\begin{problem}
+    Formulate and prove a version of the rank theorem for a map of constant rank
+    whose domain is a smooth manifold with boundary. [Hint: after extending $F$
+    arbitrarily as we did in the proof of Theorem 4.15, follow through the proof
+    of the rank theorem until the point at which the constant-rank hypothesis
+    is used, and then explain how to modify the extended map so that it has
+    constant rank.]
+\end{problem}
+
+%4-4
+\begin{problem}
+    Let $\gamma \colon \R \to \mathbb{T}^2$ be the curve of Example 4.20. Show that the image set $\gamma(\R)$ is dense in $\mathbb{T}^2$.
+    \begin{proof}
+    Let $\alpha$ be an irrational number. We first show that the set 
+    \[
+    \alpha\mathbb{Z} + \mathbb{Z} = \{ m + n\alpha : m,n \in \mathbb{Z} \}
+    \]
+    is dense in $\mathbb{R}$.
+
+    Indeed, let $x \in \mathbb{R}$ and $\varepsilon > 0$ be arbitrary. Choose $N \in \mathbb{N}$ such that $1/N < \varepsilon$. By \textbf{Dirichlet’s Approximation Lemma}, there exist integers $m,n$ with $n > 0$ such that 
+    \[
+    |n\alpha - m| < \frac{1}{N} < \varepsilon.
+    \]
+    Set $\delta = n\alpha - m$, so that $|\delta| < \varepsilon$. Consider the set
+    \[
+    B := \{ k\delta : k \in \mathbb{Z} \}.
+    \]
+    By the division algorithm, there exists $k \in \mathbb{Z}$ such that
+    \[
+    |x - k\delta| \le \frac{|\delta|}{2} < \varepsilon.
+    \]
+    Since $k\delta = kn\alpha - km \in \alpha\mathbb{Z} + \mathbb{Z}$, we have found integers $n' = kn$, $m' = -km$ such that
+    \[
+    |x - (n'\alpha + m')| < \varepsilon.
+    \]
+    This proves that $\alpha\mathbb{Z} + \mathbb{Z}$ is dense in $\mathbb{R}$.
+
+    \medskip
+
+    Now, take an arbitrary point 
+    \[
+    p = \big(e^{2\pi i x},\, e^{2\pi i y}\big) \in \mathbb{T}^2
+    \]
+    and $\varepsilon > 0$. Since $\alpha\mathbb{Z} + \mathbb{Z}$ is dense in $\mathbb{R}$, there exist integers $m, n$ such that
+    \[
+    |(\alpha x - y) + \alpha m - n| < \frac{\varepsilon}{2\pi}.
+    \]
+    Let $t = x + m$. Then
+    \begin{align*}
+    \|\gamma(t) - p\|_1
+    &= \big| e^{2\pi i x} - e^{2\pi i t} \big| \;+\; \big| e^{2\pi i y} - e^{2\pi i \alpha t} \big| \\
+    &= \big| e^{2\pi i y} - e^{2\pi i \alpha (x+m)} \big| \\
+    &\le 2\pi\, \big| \alpha(x+m) - y - n \big| \\
+    &= 2\pi\, \big| (\alpha x - y) + \alpha m - n \big| \\
+    &< \varepsilon.
+    \end{align*}
+    Thus, for any point $p \in \mathbb{T}^2$ and any $\varepsilon > 0$, there exists $t \in \mathbb{R}$ such that $\|\gamma(t) - p\|_1 < \varepsilon$. Therefore,
+    \[
+    \overline{\gamma(\mathbb{R})} = \mathbb{T}^2,
+    \]
+    i.e., $\gamma(\mathbb{R})$ is dense in $\mathbb{T}^2$.
+    \end{proof}
+\end{problem}
+
+%4-5
+\begin{problem}
+    Let $\mathbb{CP}^n$ denote the $n$-dimensional complex projective space, as defined in \cref{problem:1-9}.
+    \begin{enumerate}
+        \item Show that the quotient map $\pi \colon \C^{n+1} \setminus \{0\} \to \mathbb{CP}^n$ is a surjective smooth submersion.
+        \item Show that $\mathbb{CP}^1$ is diffeomorphic to $\Sph^2$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}
+            \item It is clear that $\pi$ is a smooth surjective map. We now show that it is a submersion. Let $p=(z^1, \dots, z^{n+1}) \in \C^{n+1} \setminus \{0\}$. Without loss of generality, assume $z^{n+1} \neq 0$. Then $p \in \widehat{U}_{n+1}$ and $\pi(p) \in U_{n+1}$, where we work in the corresponding local chart.  
+
+            In these coordinates, the Jacobian matrix of $\pi$ at $p$ is
+            \[
+            \begin{pmatrix}
+            \tfrac{1}{z^{n+1}} & 0 & \cdots & 0 & -\tfrac{z^1}{(z^{n+1})^2} \\
+            0 & \tfrac{1}{z^{n+1}} & \cdots & 0 & -\tfrac{z^2}{(z^{n+1})^2} \\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            0 & 0 & \cdots & \tfrac{1}{z^{n+1}} & -\tfrac{z^n}{(z^{n+1})^2}
+            \end{pmatrix}.
+            \]
+            This matrix is clearly surjective, hence $\pi$ is a submersion.
+
+            \item Define a map $F \colon \mathbb{CP}^1 \to \Sph^2$ by
+            \[
+            F([z,w]) = \frac{\left(z\bar{w}+w\bar{z},\, i w\bar{z}-i z\bar{w},\, |z|^2-|w|^2\right)}{|z|^2+|w|^2}.
+            \]
+            This map is bijective, since we can explicitly write its inverse:
+            \[
+            F^{-1}(x,y,z) =
+            \begin{cases}
+                [x+iy,\, 1-z], & (x,y,z) \neq (0,0,1), \\[6pt]
+                [1,0], & (x,y,z) = (0,0,1).
+            \end{cases}
+            \]
+            The map $F$ is manifestly smooth as a map from $\mathbb{CP}^1$ into $\R^3$, and by Corollary~5.30 it is smooth onto $\Sph^2$. We now verify that $F^{-1}$ is smooth as well.  
+
+            Consider the stereographic projection $\sigma \colon \Sph^2 \setminus \{(0,0,1)\} \to \R^2$ and the standard smooth chart $(U_2,\varphi_2)$ on $\mathbb{CP}^1$, where
+            \[
+            U_2 = \{[z,w] \in \mathbb{CP}^1 : w \neq 0\}.
+            \]
+            Then the coordinate expression from $\R^2$ into $U_2$ is
+            \begin{align*}
+                \varphi \circ F^{-1} \circ \sigma^{-1}(u,v)
+                &= \varphi \circ F^{-1}\!\left(\frac{(2u,\,2v,\,u^2+v^2-1)}{u^2+v^2+1}\right) \\
+                &= \varphi([u+iv,1]) \\
+                &= u+iv.
+            \end{align*}
+            The same holds for stereographic projection from the south pole. Therefore $F^{-1}$ is smooth.
+        \end{enumerate}
+    \end{proof}
+\end{problem}
+
+%4-6
+\begin{problem}
+    Let $M$ be a nonempty smooth compact manifold. Show that there is no smooth submersion $F \colon M \to \R^k$ for any $k > 0$.
+    \begin{proof}
+    Suppose, for the sake of contradiction, that there exists a smooth submersion 
+    $F \colon M \to \R^k$. By Theorem~4.28, $F$ is an open map. Hence $F(M)$ is an open subset of $\R^k$.  
+
+    On the other hand, since $M$ is compact, its image $F(M)$ is also compact, and therefore closed and bounded in $\R^k$. Thus $F(M)$ is both open and closed in $\R^k$.  
+
+    Because $\R^k$ is connected when $k>0$, it follows that $F(M) = \R^k$. But this is impossible, since $\R^k$ is unbounded whereas $F(M)$, being compact, is bounded. This contradiction shows that no such smooth submersion can exist.
+    \end{proof}
+\end{problem}
+
+%4-7
+\begin{problem}
+    Suppose $M$ and $N$ are smooth manifolds, and $\pi \colon M \to N$ is a surjective
+ smooth submersion. Show that there is no other smooth manifold structure
+ on $N$ that satisfies the conclusion of Theorem 4.29; in other words,assuming
+ that $\tilde{N}$ represents the same set as $N$ with a possibly different topology and
+ smooth structure, and that for every smooth manifold $P$ with or without
+ boundary, a map $F \colon \tilde{N} \to P$ is smooth if and only if $F \circ \pi$ is smooth, show
+ that $\mathrm{Id}_N$ is a diffeomorphism between $N$ and $\tilde{N}$. [Remark: this shows that
+ the property described in Theorem 4.29 is “characteristic” in the same sense
+ as that in which Theorem A.27(a) is characteristic of the quotient topology.]
+    \begin{proof}
+    Denote by $\operatorname{Id}_{\tilde{N}} \colon \tilde{N} \to N$ and 
+    $\operatorname{Id}_{N} \colon N \to \tilde{N}$ the two set-theoretic identity maps,
+    and write $\operatorname{Id}$ for the identity on $N$ or on $\tilde{N}$ as appropriate.  
+
+    We first show that $\operatorname{Id}_{N}$ is smooth.  
+    Consider the commutative diagram
+    \[
+    \begin{tikzcd}
+    M \arrow[d,"\pi"'] \arrow[dr,"\pi"] & \\
+    \tilde{N} \arrow[r,"\operatorname{Id}"'] & \tilde{N}
+    \end{tikzcd}
+    \]
+    Since $\operatorname{Id}$ is smooth, the universal property of $\tilde{N}$ ensures that 
+    $\pi \colon M \to \tilde{N}$ is smooth. Now consider
+    \[
+    \begin{tikzcd}
+    M \arrow[d,"\pi"'] \arrow[dr,"\pi"] & \\
+    N \arrow[r,"\operatorname{Id}_N"'] & \tilde{N}
+    \end{tikzcd}
+    \]
+    which commutes. By the defining property of the smooth structure on $\tilde{N}$, 
+    this implies that $\operatorname{Id}_N$ is smooth.  
+
+    Next we check that $\operatorname{Id}_{\tilde{N}}$ is smooth. Consider the diagram
+    \[
+    \begin{tikzcd}
+    M \arrow[d,"\pi"'] \arrow[dr,"\pi"] & \\
+    \tilde{N} \arrow[r,"\operatorname{Id}_{\tilde{N}}"'] & N
+    \end{tikzcd}
+    \]
+    which also commutes. By the same reasoning, $\operatorname{Id}_{\tilde{N}}$ is smooth.  
+
+    Thus $\operatorname{Id}_{N}$ and $\operatorname{Id}_{\tilde{N}}$ are smooth inverses of one another, 
+    so they are diffeomorphisms. Therefore the smooth structures on $N$ and $\tilde{N}$ agree.
+    \end{proof}
+\end{problem}
+
+%4-8
+\begin{problem}
+    This problem shows that the converse of Theorem 4.9 is false. 
+    Let $\pi \colon \R^2 \to \R$ be defined by $\pi(x,y) = xy$. Show that 
+    $\pi$ is surjective ans smooth, and for each smooth manifold $P$, a map $F \colon \R \to P$ is smooth if and only if $F \circ \pi$ is smooth; but $\pi$ is not a smooth submersion.
+    \begin{proof}
+    It is clear that $\pi$ is surjective, since for any $x \in \R$ we have $\pi(x,1) = x$.  
+    Moreover, $\pi$ is smooth as a polynomial map. However, $\pi$ is not a submersion, 
+    because its differential vanishes at the origin:
+    \[
+    d\pi_{(0,0)}(v_1,v_2) = 0 \quad \text{for all } (v_1,v_2) \in \R^2.
+    \]
+
+    Now suppose $F \circ \pi$ is smooth for some map $F \colon \R \to P$, 
+    where $P$ is a smooth manifold.  
+    Consider the smooth curve
+    \[
+    \gamma \colon \R \to \R^2, \quad t \mapsto (1,t).
+    \]
+    Then for all $t \in \R$ we have
+    \[
+    F(t) = F \circ \pi(1,t) = (F \circ \pi \circ \gamma)(t).
+    \]
+    Since both $\pi$ and $\gamma$ are smooth, their composition $\pi \circ \gamma$ is smooth.  
+    Hence $F \circ \pi \circ \gamma$ is smooth, and therefore $F$ itself is smooth.  
+
+    This shows that $F$ is smooth if and only if $F \circ \pi$ is smooth. 
+    \end{proof}
+\end{problem}
+
+%4-9
+\begin{problem}
+    Let $M$ be a connected smooth manifold, and let $\pi \colon E \to M$ be a topological covering map. 
+    Complete the proof of Proposition 4.40 by showing that there is only one smooth structure on $E$ such that 
+    $\pi$ is a smooth covering map. [Hint: use the existence of smooth local sections.]
+    \begin{proof}
+        Let $E_1$ and $E_2$ denote the same topological space $E$ equipped with two possibly different smooth structures such that $\pi \colon E_i \to M$ is a smooth covering map for $i=1,2$.  
+        To show that the smooth structures coincide, it suffices to prove that the identity map
+        \[
+        \operatorname{Id}\colon E_1 \to E_2
+        \]
+        is a diffeomorphism.
+
+        Since $\operatorname{Id}$ is a bijection, we need only check that it is locally smooth with smooth inverse.  
+        Fix $p \in E$ and write $q=\pi(p) \in M$. Because $\pi\colon E_1 \to M$ is a smooth covering map, there exists a neighborhood $U \subseteq M$ of $q$ and an open neighborhood $V \subseteq E$ of $p$ such that
+        \[
+        \pi|_V \colon V \to U
+        \]
+        is a diffeomorphism. The same holds for $\pi\colon E_2 \to M$, and since the underlying topology of $E$ is the same, we may take the same $V \subseteq E$ and $U \subseteq M$ for both structures.  
+
+        Now observe that on $V$,
+        \[
+        \operatorname{Id}_V = \bigl((\pi|_V)^{-1}\bigr)_{E_2} \circ \pi|_{V,E_1},
+        \]
+        that is, the identity on $V$ can be written as the composition of two diffeomorphisms.  
+        Hence $\operatorname{Id}_V$ is a diffeomorphism. Since $p$ was arbitrary, $\operatorname{Id}$ is locally a diffeomorphism everywhere, and therefore a global diffeomorphism.  
+
+        Thus $E_1$ and $E_2$ have the same smooth structure, proving uniqueness.
+    \end{proof}
+
+\end{problem}
+
+%4-10
+\begin{problem}
+    Show that the map $q \colon \Sph^n \to \mathbb{RP}^n$ defined in Example 2.13(f) is a 
+    smooth covering map.
+    \begin{proof}
+        Let $(U_i,\varphi_i)$ be the standard coordinate charts on $\mathbb{RP}^n$, where
+        \[
+        U_i = \{[x^1,\dots,x^{n+1}] \in \mathbb{RP}^n : x^i \neq 0\}, \qquad
+        \varphi_i([x^1,\dots,x^{n+1}]) = \left(\frac{x^1}{x^i}, \dots, \widehat{\frac{x^i}{x^i}}, \dots, \frac{x^{n+1}}{x^i}\right).
+        \]
+        By the definition of $q$, the preimage of $U_i$ is the disjoint union
+        \[
+        q^{-1}(U_i) = V_i^+ \sqcup V_i^-,
+        \]
+        where
+        \[
+        V_i^+ = \{(x^1,\dots,x^{n+1}) \in \Sph^n : x^i>0\}, \qquad
+        V_i^- = \{(x^1,\dots,x^{n+1}) \in \Sph^n : x^i<0\}.
+        \]
+
+        We claim that the restrictions $q|_{V_i^+}$ and $q|_{V_i^-}$ are diffeomorphisms onto $U_i$.  
+        Consider $q|_{V_i^+}$. Define a chart on $V_i^+$ by
+        \[
+        \psi_i \colon V_i^+ \to \mathbb{R}^n, \qquad
+        \psi_i(x^1,\dots,x^{n+1}) = (x^1,\dots,\widehat{x^i},\dots,x^{n+1}).
+        \]
+        Its inverse is
+        \[
+        \psi_i^{-1}(u^1,\dots,u^n) = (u^1,\dots,u^{i-1},\sqrt{1-|u|^2},u^i,\dots,u^n),
+        \]
+        where $|u|^2=(u^1)^2+\cdots+(u^n)^2$. Then
+        \begin{align*}
+        (\varphi_i \circ q \circ \psi_i^{-1})(u^1,\dots,u^n)
+        &= \varphi_i\bigl([\,u^1,\dots,u^{i-1},\sqrt{1-|u|^2},u^i,\dots,u^n\,]\bigr) \\
+        &= \frac{1}{\sqrt{1-|u|^2}}\,(u^1,\dots,u^n).
+        \end{align*}
+        This map is clearly a diffeomorphism from $\psi_i(V_i^+)$ onto $\varphi_i(U_i)$.  
+        The same argument applies to $q|_{V_i^-}$, replacing $\sqrt{1-|u|^2}$ by $-\sqrt{1-|u|^2}$.
+
+        Since $\{U_i\}$ is an open cover of $\mathbb{RP}^n$, the local triviality condition is satisfied, and hence $q$ is a smooth covering map.
+    \end{proof}
+\end{problem}
+
+%4-11
+\begin{problem}
+    Show that a topological covering map is proper if and only if its fibers are finite, 
+    and therefore the converse of Proposition 4.46 is false.
+    \begin{proof}
+    Suppose first that the covering map $\pi$ is proper. For any $p\in M$, the set $\{p\}$ is compact, hence $\pi^{-1}(\{p\})=\pi^{-1}(p)$ is compact. Choose an evenly covered neighborhood $U$ of $p$, so
+    \[
+    \pi^{-1}(U)=\bigsqcup_{\alpha\in A} V_\alpha
+    \]
+    with each $V_\alpha$ mapped homeomorphically onto $U$. In particular, each $V_\alpha$ contains exactly one point $q$ with $\pi(q)=p$. Then $\{V_\alpha\}_{\alpha\in A}$ is an open cover of the fiber $\pi^{-1}(p)$ by pairwise disjoint singletons. If the fiber were infinite, no finite subfamily of these sets could cover it, contradicting the compactness of $\pi^{-1}(p)$. Hence $\pi^{-1}(p)$ is finite.
+
+    Conversely, assume all fibers are finite. Let $K\subseteq M$ be compact, and let $\{U_\alpha\}$ be an open cover of $\pi^{-1}(K)$. For each $p\in K$, write the finite fiber as
+    \[
+    \pi^{-1}(p)=\{q_1,\dots,q_{n(p)}\}.
+    \]
+    Choose an evenly covered neighborhood $W_p$ of $p$ such that
+    \[
+    \pi^{-1}(W_p)=\bigsqcup_{i=1}^{n(p)} V_{p,i},
+    \]
+    with each $V_{p,i}$ mapped homeomorphically onto $W_p$ and containing $q_i$. For each $i$, pick $U_{p,i}\in\{U_\alpha\}$ with $q_i\in U_{p,i}$, and shrink $W_p$ if necessary so that $V_{p,i}\subseteq U_{p,i}$ for all $i$.
+
+    Then $\{W_p:p\in K\}$ covers $K$, so by compactness there exist $p_1,\dots,p_m$ with $K\subseteq\bigcup_{j=1}^m W_{p_j}$. Consequently,
+    \[
+    \pi^{-1}(K)\subseteq \bigcup_{j=1}^m \pi^{-1}(W_{p_j})
+    = \bigcup_{j=1}^m \bigcup_{i=1}^{n(p_j)} V_{p_j,i}
+    \subseteq \bigcup_{j=1}^m \bigcup_{i=1}^{n(p_j)} U_{p_j,i},
+    \]
+    and the right-hand side is a finite subfamily of $\{U_\alpha\}$ covering $\pi^{-1}(K)$. Hence $\pi^{-1}(K)$ is compact, so $\pi$ is proper.
+
+    Therefore, a covering map is proper if and only if all its fibers are finite.
+    \end{proof}
+\end{problem}
+
+%4-12
+\begin{problem}
+    Using the covering map $\varepsilon^2 \colon \R^2 \to \mathbb{T}^2$ (see Example 4.35), show that 
+    the immersion $X \colon \R^2 \to \R^3$ defined in Example 4.2(d) descends to a smooth embedding of $\mathbb{T}^2$ into $\R^3$. 
+    Specifically, show that $X$ passes to the quotient to define a smooth map $ \widetilde{X} \colon \mathbb{T}^2 \to \R^3$, 
+    and then show that $\widetilde{X}$ is a smooth embedding whose image is the given surface of revolution.
+    \begin{proof}
+        It's clear that $X$ is constant on each fiber of $\varepsilon^2$, by Theorem 4.30 there exists a unique smooth map $\widetilde{X}$ s.t. $\widetilde{X} \circ \varepsilon^2 = X$.
+
+        First we prove that $\widetilde{X}$ is injective. Suppose $\widetilde{X}(q_1) = \widetilde{X}(q_2)$, since $\varepsilon^2$ is surjective, there exist $p_1, p_2 \in \R^2$ s.t. $\varepsilon^2(p_i) = q_i$ for $i=1,2$.
+        Thus $X(p_1) = X(p_2)$, which implies $p_1 = p_2 + (n_1, n_2)$, $(n_1, n_2) \in \Z^2$. Since $\varepsilon^2(p_1) = \varepsilon^2(p_2)$ we have $q_1 = q_2$, thus $\widetilde{X}$ is injective.
+
+        Since $X$ is an immersion and $ \varepsilon^2$ is a submersion, $\dd{X} = \dd{\widetilde{X}} \circ \dd{\varepsilon^2}$ implies $\dd{\widetilde{X}}$ is injective, thus $\widetilde{X}$ is a injective smooth immersion.
+
+        By Proposition 4.22(c), ${\widetilde{X}}$ yields an embedding since $\mathbb{T}^2$ is compact.
+    \end{proof}
+\end{problem}
+
+%4-13
+\begin{problem}
+    Define a map $F \colon \Sph^2 \to \R^4$ by $F(x,y,z) = (x^2 - y^2, xy, xz, yz)$. 
+    Using the smooth covering map of Example 2.13(f) and \cref{problem:4-10}, show that $F$ descends to a smooth embedding of $\mathbb{RP}^2$ into $\R^4$.
+    \begin{proof}
+    Let $q \colon \Sph^2 \to \mathbb{RP}^2$ be the smooth covering map from \cref{problem:4-10}, which is a surjective smooth submersion. Since $F$ takes the same value on both points of each fiber of $q$, we have
+    \[
+    q^{-1}([x,y,z]) = \left\{ \pm \frac{(x,y,z)}{\sqrt{x^2+y^2+z^2}} \right\}, 
+    \quad 
+    F\!\left(\frac{(x,y,z)}{\sqrt{x^2+y^2+z^2}}\right) 
+    = F\!\left(-\frac{(x,y,z)}{\sqrt{x^2+y^2+z^2}}\right).
+    \]
+    By Theorem~4.30, there exists a unique smooth map 
+    \[
+    \widetilde{F} \colon \mathbb{RP}^2 \to \R^4
+    \]
+    such that $F = \widetilde{F} \circ q$.
+
+    To show that $\widetilde{F}$ is a smooth embedding, it suffices to prove that it is an injective immersion. Suppose
+    \[
+    F(x,y,z) = (a,b,c,d) = (x^2 - y^2, \, xy, \, yz, \, xz).
+    \]
+    Since $(x^2+y^2)^2 = (x^2 - y^2)^2 + 4x^2y^2 = a^2 + 4b^2$, we obtain
+    \[
+    x^2 + y^2 = \sqrt{a^2 + 4b^2}, 
+    \quad 
+    x^2 = \frac{\sqrt{a^2+4b^2} \pm a}{2}, 
+    \quad 
+    z^2 = 1 - \sqrt{a^2+4b^2}.
+    \]
+    Thus the triple $(x^2,y^2,z^2)$ is uniquely determined by $(a,b,c,d)$. To determine the signs of $x,y,z$, note that
+    \[
+    \begin{cases}
+    \operatorname{sgn}(x)\operatorname{sgn}(y) = \operatorname{sgn}(b),\\[6pt]
+    \operatorname{sgn}(y)\operatorname{sgn}(z) = \operatorname{sgn}(c),\\[6pt]
+    \operatorname{sgn}(x)\operatorname{sgn}(z) = \operatorname{sgn}(d).
+    \end{cases}
+    \]
+    This system has exactly two solutions, which differ by an overall sign change. Hence $F$ identifies only antipodal points, and so $\widetilde{F}$ is injective on $\mathbb{RP}^2$.
+
+    That $\widetilde{F}$ is an immersion follows by an argument similar to that in \cref{problem:4-12}. Since $\mathbb{RP}^2$ is compact, an injective immersion into $\R^4$ is a smooth embedding. Therefore, $\widetilde{F}$ is a smooth embedding of $\mathbb{RP}^2$ into $\R^4$.
+    \end{proof}
+\end{problem}
